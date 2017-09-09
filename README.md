@@ -5,21 +5,9 @@ This repository houses numerous scripts to facilitate the analyses of phylogenet
 ### Prerequisites
 
 Required software
-(assuming python3 is being used)
 
 ```
-sys
-getopt
-os.path
-re
-Bio
-numpy
-```
-
-how to install them
-
-```
-pip install "some package"
+python3
 ```
 
 ## Scripts
