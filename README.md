@@ -2,19 +2,21 @@
 
 This repository houses numerous scripts to facilitate the analyses of phylogenetic trees and fasta files
 
-### Prerequisites
-
-Required software
-
-```
-python3
-```
-
 ## Scripts
 
 A short description of each script
 
 ### Find_indel_unqiue_to_clade.py
+Requires
+```
+python3
+* sys
+* getopt
+* os.path
+* re
+* Bio
+* numpy
+```
 Identifies indels unique to specific clades within an alignment fasta file.
 Indels are identified using user specified step and window sizes.
 Separate files for each clade should be provided that contains one taxa name
