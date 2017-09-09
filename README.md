@@ -10,12 +10,12 @@ A short description of each script
 Requires
 ```
 python3
-* sys
-* getopt
-* os.path
-* re
-* Bio
-* numpy
+|- sys
+|- getopt
+|- os.path
+|- re
+|- Bio
+|- numpy
 ```
 Identifies indels unique to specific clades within an alignment fasta file.
 Indels are identified using user specified step and window sizes.
