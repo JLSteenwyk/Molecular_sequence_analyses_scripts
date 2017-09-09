@@ -75,16 +75,15 @@ def main(
             print("Explanation:")
             print("Determines the distance between two taxa in a newick tree file")
             # input fasta file
-            print("\n-i\talignment file:")
-            print("\talignment file must be in fasta format")
+            print("\n-i\ttree file:")
+            print("\ttree file must be in newick format")
             # first taxa explanation
             print("\n-o\tfirst target taxa:")
             print("\tfirst taxa of interest")
             # second taxa explanation
             print("\n-t\tsecond target taxa:")
             print("\tsecond taxa of interest")
-            print("\ndistance will be calculated between taxa specificed using -o")
-            print("and -t arguments")
+            print("\ndistance will be calculated between taxa specificed using -o and -t arguments")
             sys.exit()
         elif opt == '-i':
             if os.path.isfile(arg):
