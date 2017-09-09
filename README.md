@@ -15,6 +15,7 @@ python3
 |- os.path
 |- re
 |- Bio
+   |- SeqIO
 |- numpy
 ```
 Identifies indels unique to specific clades within an alignment fasta file.
