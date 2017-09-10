@@ -48,8 +48,8 @@ script implements a reciprocal best blast hit approach to determine average
 protein sequence identity and implements scripts made available by [Harvard](http://archive.sysbio.harvard.edu/csb/resources/computational/scriptome/UNIX/Protocols/Sequences.html). <br />
 Basic usage: bash calculate_average_protein_sequence_identity.bash A.pep.fasta B.pep.fasta
 ```
-|- perl v5.10.1
-|- ncbi-blast-2.3.0+
+perl v5.10.1
+ncbi-blast-2.3.0+
    |- makeblastdb
    |- blastp
 ```
@@ -61,11 +61,11 @@ phylogenetic inference. <br />
 Variables Clade1, Clade2, and All_Clade are hardcoded and should be changed for each use.<br />
 Basic usage: bash calculate_clade1_clade2_branch_len.bash file_of_newick_trees
 ```
-|- newick utilities v1.6
+newick utilities v1.6
    |- nw_clade
    |- nw_labels
    |- nw_distance
-|- awk v3.1.7
+awk v3.1.7
 ```
 
 ## Authors
