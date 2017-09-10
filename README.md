@@ -50,8 +50,8 @@ Basic usage: bash calculate_average_protein_sequence_identity.bash A.pep.fasta B
 ```
 perl v5.10.1
 ncbi-blast-2.3.0+
-   |- makeblastdb
-   |- blastp
+|- makeblastdb
+|- blastp
 ```
 
 ### calculate_clade1_clade2_branch_len.bash
@@ -62,9 +62,9 @@ Variables Clade1, Clade2, and All_Clade are hardcoded and should be changed for 
 Basic usage: bash calculate_clade1_clade2_branch_len.bash file_of_newick_trees
 ```
 newick utilities v1.6
-   |- nw_clade
-   |- nw_labels
-   |- nw_distance
+|- nw_clade
+|- nw_labels
+|- nw_distance
 awk v3.1.7
 ```
 
