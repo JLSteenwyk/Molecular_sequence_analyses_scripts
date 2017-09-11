@@ -89,6 +89,14 @@ python3
 Basic usage: python seq_length.py mfasta.file
 Original author: [GummyBear](https://bioexpressblog.wordpress.com/2014/04/15/calculate-length-of-all-sequences-in-an-multi-fasta-file/)
 
+### Split_Fasta_by_Header.sh
+Renames headers in a fasta file to the following format >ID@xyz where 
+xyz will be 0-n where n is the number of fasta headers minus one. First argument
+should be the ID and the second argument should be the multi-fasta file ending in ".fa"
+```
+awk v3.1.7
+```
+Basic usage: bash Split_Fasta_by_Header.sh Spp_ID fasta_file_name
 ## Authors
 
 * **Jacob Steenwyk** - [Github page](https://jsteenwyk.github.io/)
