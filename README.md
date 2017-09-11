@@ -75,24 +75,24 @@ Input is the fasta file and a file with the header names in desired order of out
 python3
 |- sys
 ```
-Basic usage: reorder_fasta.py file.fasta file.reference
+Basic usage: reorder_fasta.py file.fasta file.reference <br />
 Original author: [dariober](http://seqanswers.com/forums/showthread.php?t=29558)
 
 ### seq_length.py
-Prints fasta header and fasta length in a multi-fasta file. <br />
+Prints fasta header and fasta length in a multi-fasta file.
 ```
 python3
 |- sys
 |- Bio
    |- SeqIO
 ```
-Basic usage: python seq_length.py mfasta.file
+Basic usage: python seq_length.py mfasta.file <br />
 Original author: [GummyBear](https://bioexpressblog.wordpress.com/2014/04/15/calculate-length-of-all-sequences-in-an-multi-fasta-file/)
 
 ### Split_Fasta_by_Header.sh
 Renames headers in a fasta file to the following format >ID@xyz where 
-xyz will be 0-n where n is the number of fasta headers minus one. First argument
-should be the ID and the second argument should be the multi-fasta file ending in ".fa"
+xyz will be 0-n where n is the number of fasta headers minus one. <br /> 
+First argument should be the ID and the second argument should be the multi-fasta file ending in ".fa"
 ```
 awk v3.1.7
 ```
