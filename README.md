@@ -76,21 +76,23 @@ python3
 |- sys
 ```
 Basic usage: reorder_fasta.py file.fasta file.reference
+Original author: [dariober](http://seqanswers.com/forums/showthread.php?t=29558)
 
 ### seq_length.py
 Prints fasta header and fasta length in a multi-fasta file. <br />
-Basic usage: python seq_length.py mfasta.file
 ```
 python3
 |- sys
 |- Bio
    |- SeqIO
 ```
+Basic usage: python seq_length.py mfasta.file
 Original author: [GummyBear](https://bioexpressblog.wordpress.com/2014/04/15/calculate-length-of-all-sequences-in-an-multi-fasta-file/)
 
 ## Authors
 
 * **Jacob Steenwyk** - [Github page](https://jsteenwyk.github.io/)
+* The online community of bioinformaticians. Other contributors are listed per script.
 
 ## Acknowledgments
 
