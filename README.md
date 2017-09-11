@@ -1,4 +1,4 @@
-# Scripts to enable phylogenetic and related analyses
+# Scripts to enable phylogenetic, molecular, and related analyses
 
 This repository houses numerous scripts to facilitate the analyses of phylogenetic trees and fasta files
 
@@ -76,6 +76,17 @@ python3
 |- sys
 ```
 Basic usage: reorder_fasta.py file.fasta file.reference
+
+### seq_length.py
+Prints fasta header and fasta length in a multi-fasta file. <br />
+Basic usage: python seq_length.py mfasta.file
+```
+python3
+|- sys
+|- Bio
+   |- SeqIO
+```
+Original author: [GummyBear](https://bioexpressblog.wordpress.com/2014/04/15/calculate-length-of-all-sequences-in-an-multi-fasta-file/)
 
 ## Authors
 
