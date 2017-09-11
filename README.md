@@ -100,7 +100,7 @@ Basic usage: bash Split_Fasta_by_Header.sh Spp_ID fasta_file_name
 ## Authors
 
 * **Jacob Steenwyk** - [Github page](https://jsteenwyk.github.io/)
-* The online community of bioinformaticians. Other contributors are listed per script.
+* The online community of bioinformaticians. Other/original authors are listed per script.
 
 ## Acknowledgments
 
