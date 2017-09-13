@@ -213,6 +213,12 @@ def main(
     # test for arguments
     for opt, arg in opts:
         if opt == '-h':
+            # script explanation
+            print("\nThis script detects indels between two clades in an aligned")
+            print("mfasta file. It will print which parts of the mfasta file have")
+            print("the indel as well as which clade has a deletion. If clade 2 has")
+            print("deletion, it will be reported as 'gap2' in the third column of")
+            print("the output.")
             # window size explanation
             print("\n-w\twindow size:")
             print("\tspecifies the number of nucleotides to be analyzing at once")
