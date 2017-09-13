@@ -133,7 +133,6 @@ def find_indels(
                     idx_jj = idx_ii + 1
         # except for end of indel_arr
         except IndexError:
-            line_ii = indel_arr[idx_ii]
             merged_data.append(line_ii)
             idx_opt = False
     

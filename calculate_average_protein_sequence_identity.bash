@@ -18,8 +18,8 @@ makeblastdb -in $genomeA -dbtype prot
 makeblastdb -in $genomeB -dbtype prot
 
 # blast genome A to B and vice versa
-blastp -query $genomeA -db $genomeB -evalue 3 -outfmt 6 -num_threads 12 -out $genomeA.dbB.fmt6.blast
-blastp -query $genomeB -db $genomeA -evalue 3 -outfmt 6 -num_threads 12 -out $genomeB.dbA.fmt6.blast
+blastp -query $genomeA -db $genomeB -evalue 1e-05 -outfmt 6 -num_threads 12 -out $genomeA.dbB.fmt6.blast
+blastp -query $genomeB -db $genomeA -evalue 1e-05 -outfmt 6 -num_threads 12 -out $genomeB.dbA.fmt6.blast
 
 ### Step 02
 ## execute RBBH analyses using scripts from harvard resource
