@@ -24,6 +24,27 @@ python3
 |- numpy
 ```
 
+### Find_indel_unqiue_to_clade_context_wOutgroup.py
+Identifies indels unique to specific clades within an alignment fasta file.
+Indels are identified using user specified step and window sizes.
+Separate files for each clade should be provided that contains one taxa name
+per line. Unlike 'Find_indel_unqiue_to_clade.py,' this script will contextualize
+findings according to the outgroup status. That is to say that if clade 1 has gaps 
+and clade 2 has nts and the outgroup clade has nts, clade 1 will be classified as 
+a deletion. <br />
+For detailed information use the -h argument <br />
+Basic usage: python Find_indel_unqiue_to_clade.py -w window -o clade1.file -t clade2.file -i alignment.fasta -s step
+```
+python3
+|- sys
+|- getopt
+|- os.path
+|- re
+|- Bio
+   |- SeqIO
+|- numpy
+```
+
 ### Calculate_distance_between_two_taxa.py
 Calculates phylogenetic distance between two taxa in a newick tree file.
 Taxa names are provided as arguments. <br />
