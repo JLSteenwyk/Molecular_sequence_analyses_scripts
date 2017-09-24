@@ -33,7 +33,7 @@ findings according to the outgroup status. That is to say that if clade 1 has ga
 and clade 2 has nts and the outgroup clade has nts, clade 1 will be classified as 
 a deletion. <br />
 For detailed information use the -h argument <br />
-Basic usage: python Find_indel_unqiue_to_clade.py -w window -o clade1.file -t clade2.file -i alignment.fasta -s step
+Basic usage: python Find_indel_unqiue_to_clade.py -w window -o clade1.file -t clade2.file -i alignment.fasta -s step -g outgroup_clade.file
 ```
 python3
 |- sys
