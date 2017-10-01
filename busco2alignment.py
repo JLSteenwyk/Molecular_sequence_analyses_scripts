@@ -12,11 +12,12 @@ from Bio.Alphabet import IUPAC
 from Bio.Seq import Seq
 import configparser
 
-def add_missing_taxa(
+def add_missing_taxa_and_write_final_files(
     buscoDirs, fastaFiles,
     fullTable, taxon_occupancy,
     final_USCO_list, mafft_path,
-    trimAl_path
+    trimAl_path, concat_fa, 
+    USCO_partition
     ):
     """
     aligns and trims USCOs
@@ -37,14 +38,18 @@ def add_missing_taxa(
         pathway to mafft program
     argv: trimAl_path
         pathway to trimAl program
+    argv: concat_fa
+        output file name for concat fa
+    argv: USCO_partition
+        output file name for the partition file
     """
 
     # initialize headerNames to store names of all indivs per fa
     # , concat.fa file, dictionary to populate concat.fa with
     headerNames = []
-    concat_fa   = 'concat.fa'
     concatD     = {}
-    cnt = 0
+    firstLen    = 1
+    secondLen   = 1
 
     # loop through fasta files, read first line, save id
     for fastas in fastaFiles:
@@ -54,8 +59,11 @@ def add_missing_taxa(
             first_line = re.sub(r'\|.*', '', first_line)
             headerNames.append(first_line)
     
+    # populate empty dictionary with no values and keys
+    # of the various indivs
     concatD = {key: [] for key in headerNames}
 
+    open(USCO_partition, "w")
     # loop through USCO trimal files
     for USCOid in final_USCO_list:
         # list for keep track of taxa per USCO
@@ -89,24 +97,31 @@ def add_missing_taxa(
         for record in records:
             if record.id in USCOtaxa:
                 concatD[record.id].append(record.seq)
+        # create partition file
+        with open(USCO_partition, "a") as f:
+            # second value in partition file
+            secondLen += USCOlen
+            entry = "AUTO, "+str(USCOid)+"="+str(firstLen)+"-"+str(secondLen)+"\n"
+            f.write(str(entry))
+            # add to first value for partition file
+            firstLen += USCOlen
 
-    # join seqs of genes in value (list)     
-    for x in concatD:
-        concatenated = Seq("", IUPAC.protein)
-        for s in concatD[x]:
-            concatenated += s
-        concatD[x] = concatenated
-        entry = '>'+x+"\n"+concatD[x]
-        print(entry)
-
-
-
+    # join seqs of genes in value (list) and write to concat_fa   
+    with open(concat_fa, "w") as final_fasta_file: 
+        for x in concatD:
+            concatenated = Seq("", IUPAC.protein)
+            for s in concatD[x]:
+                concatenated += s
+            concatD[x] = concatenated
+            entry = '>'+x+"\n"+concatD[x]+"\n"
+            final_fasta_file.write(str(entry))
 
 def align_and_trim(
     buscoDirs, fastaFiles,
     fullTable, taxon_occupancy,
     final_USCO_list, mafft_path,
-    trimAl_path
+    trimAl_path, concat_fa, 
+    USCO_partition
     ):
     """
     aligns and trims USCOs
@@ -127,6 +142,10 @@ def align_and_trim(
         pathway to mafft program
     argv: trimAl_path
         pathway to trimAl program
+    argv: concat_fa
+        output file name for concat fa
+    argv: USCO_partition
+        output file name for the partition file
     """
 
     # initialize USCO fasta, mafft, and trimal variables
@@ -170,11 +189,12 @@ def align_and_trim(
                     subprocess.call([trimAl_path, '-in', USCOmafft, '-out', 
                         USCOtrimal, '-automated1'], stdout = f)
         
-    add_missing_taxa(
+    add_missing_taxa_and_write_final_files(
         buscoDirs, fastaFiles,
         fullTable, taxon_occupancy,
         final_USCO_list, mafft_path,
-        trimAl_path
+        trimAl_path, concat_fa, 
+        USCO_partition
         )
 
 
@@ -184,7 +204,8 @@ def create_fas_per_USCO(
     buscoDirs, fastaFiles,
     fullTable, taxon_occupancy,
     final_USCO_list, mafft_path,
-    trimAl_path
+    trimAl_path, concat_fa, 
+    USCO_partition
     ):
     """
     creates fasta files per USCO that passes the 
@@ -206,6 +227,10 @@ def create_fas_per_USCO(
         pathway to mafft program
     argv: trimAl_path
         pathway to trimAl program
+    argv: concat_fa
+        output file name for concat fa
+    argv: USCO_partition
+        output file name for the partition file
     """
 
     # initialize variable for fastaFiles len
@@ -216,7 +241,6 @@ def create_fas_per_USCO(
         open(USCOfasta, "w")
 
     # loop through list of USCOs that pass taxon occupancy
-    cnt = 1
     fastaFilesLength = len(fastaFiles)
     for directory, fastas, table in zip(buscoDirs, fastaFiles, fullTable):
         # open busco output table
@@ -243,19 +267,20 @@ def create_fas_per_USCO(
                         USCOfasta = line[0]+".fa"
                         with open(USCOfasta, "a") as output_handle:
                             SeqIO.write(fasta_dict[line[2]], output_handle, format)
-        cnt+=1
 
     align_and_trim(
         buscoDirs, fastaFiles,
         fullTable, taxon_occupancy,
         final_USCO_list, mafft_path,
-        trimAl_path
+        trimAl_path, concat_fa, 
+        USCO_partition
         )                            
 
 def determine_USCOs(
     buscoDirs, fastaFiles,
     fullTable, taxon_occupancy,
-    mafft_path, trimAl_path
+    mafft_path, trimAl_path, 
+    concat_fa, USCO_partition
     ):
     """
     Uses buscoDirs and fullTable to determine which USCOs
@@ -276,6 +301,10 @@ def determine_USCOs(
         pathway to mafft program
     argv: trimAl_path
         pathway to trimAl program
+    argv: concat_fa
+        output file name for concat fa
+    argv: USCO_partition
+        output file name for the partition file
     """
 
     # initialize dictionaries to store USCOs per busco run
@@ -307,13 +336,15 @@ def determine_USCOs(
         buscoDirs, fastaFiles,
         fullTable, taxon_occupancy,
         final_USCO_list, mafft_path,
-        trimAl_path
+        trimAl_path, concat_fa, 
+        USCO_partition
         )
 
 def read_lists(
     busco_list, fasta_list,
     taxon_occupancy, mafft_path,
-    trimAl_path
+    trimAl_path, concat_fa, 
+    USCO_partition
     ):
     """
     Reads busco and fasta list into a python list 
@@ -330,6 +361,10 @@ def read_lists(
         pathway to mafft program
     argv: trimAl_path
         pathway to trimAl program
+    argv: concat_fa
+        output file name for concat fa
+    argv: USCO_partition
+        output file name for the partition file
     """
 
     # initialize lists
@@ -353,7 +388,8 @@ def read_lists(
     determine_USCOs(
         buscoDirs, fastaFiles,
         fullTable, taxon_occupancy,
-        mafft_path, trimAl_path
+        mafft_path, trimAl_path,
+        concat_fa, USCO_partition
         )
 
 def read_config(
@@ -372,13 +408,15 @@ def read_config(
     taxon_occupancy = ''
     mafft_path      = ''
     trimAl_path     = ''
+    concat_fa       = ''
+    USCO_partition  = ''
     
 
     settings = configparser.ConfigParser()
     settings.read(config_file)
 
     # read and check busco_out path
-    busco_list = settings.get('lists', 'busco_out')
+    busco_list = settings.get('input_files', 'busco_out_list')
     if os.path.isfile(busco_list):
         1
     else:
@@ -386,7 +424,7 @@ def read_config(
         sys.exit()
 
     # read and check fasta_files path
-    fasta_list = settings.get('lists', 'fasta_files')
+    fasta_list = settings.get('input_files', 'fasta_files_list')
     if os.path.isfile(fasta_list):
         1
     else:
@@ -409,12 +447,20 @@ def read_config(
         print("No or incorrect pathway to fasta_files provided in configuration file!\nExiting now...")    
         sys.exit()
 
-    # read and check trimAl path
-    trimAl_path = settings.get('programs', 'trimAl')
-    if os.path.isfile(trimAl_path):
+    # read output concatenation file path
+    concat_fa = settings.get('output_files', 'concat_fasta')
+    if concat_fa:
         1
     else:
-        print("No or incorrect pathway to fasta_files provided in configuration file!\nExiting now...")    
+        print("No concat_fasta specified in configuration file!\nExiting now...")    
+        sys.exit()
+
+    # read and check partition_file path
+    USCO_partition = settings.get('output_files', 'partition_file')
+    if USCO_partition:
+        1
+    else:
+        print("No partition_file specified in configuration file!\nExiting now...")    
         sys.exit()
 
 
@@ -422,7 +468,8 @@ def read_config(
     read_lists(
         busco_list, fasta_list,
         taxon_occupancy, mafft_path,
-        trimAl_path
+        trimAl_path, concat_fa,
+        USCO_partition
         )
 
 
@@ -438,7 +485,7 @@ def main(
     config_file = ''
 
     try:
-        opts, args = getopt.getopt(argv, "hc:")
+        opts, args = getopt.getopt(argv, "hc:t")
     except getopt.GetoptError:
         # error message
         print("Error\nFor help use -h argument\n")
@@ -452,13 +499,29 @@ def main(
     # test for arguments
     for opt, arg in opts:
         if opt == '-h':
-            # busco_out explanation
-            print("\nbusco_out:\t<list of busco dirs>")
+            # options
+            print("\n\n-c configuration file")
+            print("\tfile that contains all necessary parameters and file names")
+            print("\n-t print configuration template")
+            print("\tprints a template configuration file for the user to fill out")
+            print("\n")
+            print("Contents of configuration file")
+            print("------------------------------")
+            ## programs
+            # mafft
+            print("mafft: <pathway to mafft program>")
+            print("\tpathway to mafft program. Version(s) tested: 7.294b")
+            # trimal
+            print("\ntrimAl: <pathway to trimAl program>")
+            print("\tpathway to trimal program. Version(s) tested: 1.4.rev11")
+            ## input_files explanation
+            # busco_out_list
+            print("\nbusco_out_list: <list of busco dirs>")
             print("\tsingle column file of busco output dirs")
             print("\torder should match the list of fasta file")
             print("\tspecified in fasta_files parameter")
-            # fasta_files explanation
-            print("\nfasta_files:\t<list of fasta files>")
+            # fasta_files_list explanation
+            print("\nfasta_files_list: <list of fasta files>")
             print("\tsingle column file of fasta files")
             print("\torder should match the list of busco dirs")
             print("\tspecified in busco_out parameter")
@@ -469,11 +532,11 @@ def main(
             print("\t>ID|3")
             print("\t> ...")
             print("\t>ID|N")
+            ## parameters 
             # occupancy explanation
-            print("\noccupancy:\t<taxon occupancy>")
+            print("\noccupancy: <taxon occupancy>")
             print("\ttaxon occupancy for USCOs")
-            print("\tvalue should be between 0 and 1")
-            print("\n")
+            print("\tvalue should be between 0 and 1\n")
             sys.exit()
         elif opt == '-c':
             if os.path.isfile(arg):
@@ -483,6 +546,19 @@ def main(
                 print("\n\nThe specified configuration file does not exist.\n")
                 print("For detailed explanation of configuration file use -h argument\n")
                 sys.exit()
+        elif opt == '-t':
+            print("\n[programs]")
+            print("mafft: pathway to mafft")
+            print("trimAl: pathway to trimAl")
+            print("\n[input_files]")
+            print("busco_out_list: single column file with names of busco output dirs")
+            print("fasta_files_list: single column file with names of fasta files")
+            print("\n[output_files]")
+            print("concat_fasta: output concatenation fasta file name")
+            print("partition_file: RAxML partition file")
+            print("\n[parameters]")
+            print("occupancy: taxon occupancy per USCO, a value between 0 and 1\n")
+            sys.exit()
 
     # pass to read_config parameter
     read_config(

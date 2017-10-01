@@ -127,18 +127,23 @@ Original author: [Jacob Steenwyk](https://jsteenwyk.github.io/)
 
 ### busco2alignment.py
 Takes the full table output of busco runs and creates a concatenated fasta file for phylogenetic inference using the concatenation method. Only argument is a configuration file specified with -c.
-Configuration file should specify the path to [programs] mafft, trimAl, [lists] a single column file with the names of the busco output directories, a single column file of the fasta files, [parameters] taxon occupancy with a value between 0 and 1. Example format is the following: <br /> 
+Configuration file should specify the path to [programs] mafft, trimAl, [input_files] a single column file with the names of the busco output directories, a single column file of the fasta files, [output_files] concatenation fasta file name, partition file output name, and [parameters] taxon occupancy with a value between 0 and 1. Example format is the following: <br /> 
 [programs] <br />
 mafft: pathway to mafft <br />
 trimAl: pathway to trimAl <br /> 
 <br />
-[lists] <br />
-busco_out: a single column file with the names of the busco output directories <br />
-fasta_files: a single column file of the fasta files <br />
+[input_files] <br />
+busco_out_list: busco_dirs.list <br />
+fasta_files_list: fasta_files.list <br />
+<br /> 
+[output_files] <br />
+concat_fasta: concat.fa <br />
+partition_file: USCO_partition.txt <br /> 
 <br />
 [parameters] <br />
 occupancy: value between 0 and 1 <br />
 <br />
+Exemplary template file can be printed out using the -t option
 NOTE: busco_out and fasta_files should have files in the same order <br />
 and the fasta file header names should be formatted in the following manner:<br /> 
 \>indivID|1<br /> 
