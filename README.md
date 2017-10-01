@@ -145,6 +145,7 @@ and the fasta file header names should be formatted in the following manner:<br 
 ...<br /> 
 \>indivID|2<br /> 
 ...<br /> 
+where '|' is used in every gene name to denote specific genes but text prior to denotes a unique identifier for all genes from that fasta file.
 For detailed information about usage, use the -h argument <br />
 ```
 python3
