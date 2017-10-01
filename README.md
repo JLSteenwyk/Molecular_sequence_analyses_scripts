@@ -122,18 +122,18 @@ Basic usage: bash Split_Fasta_by_Header.sh Spp_ID fasta_file_name
 ### busco2alignment.py
 Takes the full table output of busco runs and creates a concatenated fasta file for phylogenetic inference using the concatenation method. Only argument is a configuration file specified with -c.
 Configuration file should specify the path to [programs] mafft, trimAl, [lists] a single column file with the names of the busco output directories, a single column file of the fasta files, [parameters] taxon occupancy with a value between 0 and 1. Example format is the following: <br /> 
-[programs] 
-mafft: <pathway to mafft>
-trimAl: <pathway to trimAl>
-
-[lists]
-busco_out: <a single column file with the names of the busco output directories>
-fasta_files: <a single column file of the fasta files>
-
-[parameters]
-occupancy: <value between 0 and 1>
-
-NOTE: busco_out and fasta_files should have files in the same order
+[programs] <br />
+mafft: <pathway to mafft> <br />
+trimAl: <pathway to trimAl> <br /> 
+<br />
+[lists] <br />
+busco_out: <a single column file with the names of the busco output directories> <br />
+fasta_files: <a single column file of the fasta files> <br />
+<br />
+[parameters] <br />
+occupancy: <value between 0 and 1> <br />
+<br />
+NOTE: busco_out and fasta_files should have files in the same order <br />
 and the fasta file header names should be formatted in the following manner:<br /> 
 \>indivID|1<br /> 
 ...<br /> 
