@@ -23,6 +23,7 @@ python3
    |- SeqIO
 |- numpy
 ```
+Original author: Jacob Steenwyk
 
 ### Find_indel_unqiue_to_clade_context_wOutgroup.py
 Identifies indels unique to specific clades within an alignment fasta file.
@@ -44,6 +45,7 @@ python3
    |- SeqIO
 |- numpy
 ```
+Original author: Jacob Steenwyk
 
 ### Calculate_distance_between_two_taxa.py
 Calculates phylogenetic distance between two taxa in a newick tree file.
@@ -61,6 +63,7 @@ python3
       |- BaseTree
          |- TreeMixin
 ```
+Original author: Jacob Steenwyk
 
 ### calculate_average_protein_sequence_identity.bash
 Calculates the average protein sequence identity between two whole genome
@@ -74,6 +77,7 @@ ncbi-blast-2.3.0+
 |- makeblastdb
 |- blastp
 ```
+Original author: Jacob Steenwyk
 
 ### calculate_clade1_clade2_branch_len.bash
 Calculate the internode branch length of the branch that leads up to clade 1 and clade 2.
@@ -88,6 +92,7 @@ newick utilities v1.6
 |- nw_distance
 awk v3.1.7
 ```
+Original author: Jacob Steenwyk
 
 ### reorder_fasta.py
 Reorder a multi-fasta file according to the order of header names in a third party file.
@@ -118,6 +123,7 @@ First argument should be the ID and the second argument should be the multi-fast
 awk v3.1.7
 ```
 Basic usage: bash Split_Fasta_by_Header.sh Spp_ID fasta_file_name
+Original author: Jacob Steenwyk
 
 ### busco2alignment.py
 Takes the full table output of busco runs and creates a concatenated fasta file for phylogenetic inference using the concatenation method. Only argument is a configuration file specified with -c.
@@ -160,8 +166,15 @@ python3
 |- configparser
 ```
 Basic usage: python busco2alignment.py -c config.busco2alignment > concat.fa
+Original author: Jacob Steenwyk
 
-
+### remove_column_from_alignment.pl
+Removes column from an alignment fasta file. Columns to remove should be specified as the first argument where columns are separated by a comma (,).
+```
+perl v5.10.1
+```
+Basic usage: perl remove_column_from_alignment.pl x,y,z alignment.fa <br />
+Original author: [JC](https://www.biostars.org/p/55555/)
 
 ## Authors
 
@@ -172,4 +185,6 @@ Basic usage: python busco2alignment.py -c config.busco2alignment > concat.fa
 
 * Rokas lab personnel
 * ACCRE
+* John Soghigian 
+* Xingxing Shen
 

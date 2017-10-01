@@ -148,6 +148,7 @@ def align_and_trim(
 
         # check 25 times if USCOs got aligned
         for i in range(1,26):
+            # if the mafft file has size 0, realign the fa file
             if os.stat(USCOmafft).st_size == 0:
                 # align
                 with open(USCOmafft, 'w') as f:
@@ -162,6 +163,7 @@ def align_and_trim(
 
         # check 25 times if USCOs got trimmed
         for i in range(1,26):
+            # if the mafft file has size 0, realign the fa file
             if os.stat(USCOtrimal).st_size == 0:
                 # trim
                 with open(USCOtrimal, 'w') as f:
