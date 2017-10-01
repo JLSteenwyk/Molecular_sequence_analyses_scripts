@@ -23,7 +23,7 @@ python3
 |- numpy
 ```
 Basic usage: python Find_indel_unqiue_to_clade.py -w window -o clade1.file -t clade2.file -i alignment.fasta -s step <br />
-Original author: Jacob Steenwyk
+Original author: [Jacob Steenwyk](https://jsteenwyk.github.io/)
 
 ### Find_indel_unqiue_to_clade_context_wOutgroup.py
 Identifies indels unique to specific clades within an alignment fasta file.
@@ -45,7 +45,7 @@ python3
 |- numpy
 ```
 Basic usage: python Find_indel_unqiue_to_clade.py -w window -o clade1.file -t clade2.file -i alignment.fasta -s step -g outgroup_clade.file <br />
-Original author: Jacob Steenwyk
+Original author: [Jacob Steenwyk](https://jsteenwyk.github.io/)
 
 ### Calculate_distance_between_two_taxa.py
 Calculates phylogenetic distance between two taxa in a newick tree file.
@@ -63,7 +63,7 @@ python3
          |- TreeMixin
 ```
 Basic usage: python Calculate_distance_between_two_taxa.py -i newick_tree_file -o taxa1 -t taxa2 <br />
-Original author: Jacob Steenwyk
+Original author: [Jacob Steenwyk](https://jsteenwyk.github.io/)
 
 ### calculate_average_protein_sequence_identity.bash
 Calculates the average protein sequence identity between two whole genome
@@ -77,7 +77,7 @@ ncbi-blast-2.3.0+
 |- blastp
 ```
 Basic usage: bash calculate_average_protein_sequence_identity.bash A.pep.fasta B.pep.fasta <br />
-Original author: Jacob Steenwyk
+Original author: [Jacob Steenwyk](https://jsteenwyk.github.io/)
 
 ### calculate_clade1_clade2_branch_len.bash
 Calculate the internode branch length of the branch that leads up to clade 1 and clade 2.
@@ -92,7 +92,7 @@ newick utilities v1.6
 awk v3.1.7
 ```
 Basic usage: bash calculate_clade1_clade2_branch_len.bash file_of_newick_trees <br />
-Original author: Jacob Steenwyk
+Original author: [Jacob Steenwyk](https://jsteenwyk.github.io/)
 
 ### reorder_fasta.py
 Reorder a multi-fasta file according to the order of header names in a third party file.
@@ -123,7 +123,7 @@ First argument should be the ID and the second argument should be the multi-fast
 awk v3.1.7
 ```
 Basic usage: bash Split_Fasta_by_Header.sh Spp_ID fasta_file_name <br />
-Original author: Jacob Steenwyk
+Original author: [Jacob Steenwyk](https://jsteenwyk.github.io/)
 
 ### busco2alignment.py
 Takes the full table output of busco runs and creates a concatenated fasta file for phylogenetic inference using the concatenation method. Only argument is a configuration file specified with -c.
@@ -166,7 +166,7 @@ python3
 |- configparser
 ```
 Basic usage: python busco2alignment.py -c config.busco2alignment > concat.fa <br />
-Original author: Jacob Steenwyk
+Original author: [Jacob Steenwyk](https://jsteenwyk.github.io/)
 
 ### remove_column_from_alignment.pl
 Removes column from an alignment fasta file. Columns to remove should be specified as the first argument where columns are separated by a comma (,).
