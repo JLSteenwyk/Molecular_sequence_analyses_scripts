@@ -134,11 +134,11 @@ fasta_files: <a single column file of the fasta files>
 occupancy: <value between 0 and 1>
 
 NOTE: busco_out and fasta_files should have files in the same order
-and the fasta file header names should be formatted in the following manner:
-\>indivID|1
-...
-\>indivID|2
-...
+and the fasta file header names should be formatted in the following manner:<br /> 
+\>indivID|1<br /> 
+...<br /> 
+\>indivID|2<br /> 
+...<br /> 
 
 ```
 python3
