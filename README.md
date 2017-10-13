@@ -190,7 +190,23 @@ python3
 |- re
 |- configparser
 ```
-Basic usage: python busco2alignment.py -c config.busco2alignment > concat.fa <br />
+Basic usage: python busco2alignment.py -c config.busco2alignment<br />
+Original author: [Jacob Steenwyk](https://jsteenwyk.github.io/)
+
+This script is also broken up into two parts busco2uscofa.py and trimal2concat.py. <br />
+Input and usage are the same but alignment and trimming must be done without these scripts. For trimal2concat.py, trimal files are assumed to have the following naming scheme buscoID.fa.mafft.trimal.
+
+### busco_occupancy.py
+Takes the full table output of busco runs and creates an occupancy matrix where columns are taxa and rows are busco IDs. The input file is a list of busco output dirs which is the same as "busco_out_list" in busco2alignment.py. Specifically, it is a single column file with busco output dir file names with one 
+```
+python3
+|- sys
+|- getopt
+|- os.path
+|- os
+|- re
+```
+Basic usage: python busco_occupancy.py -b busco_output_dirs -o output_file<br />
 Original author: [Jacob Steenwyk](https://jsteenwyk.github.io/)
 
 ### remove_column_from_alignment.pl
