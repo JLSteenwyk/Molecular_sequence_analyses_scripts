@@ -12,190 +12,190 @@ from Bio.Alphabet import IUPAC
 from Bio.Seq import Seq
 import configparser
 
-def add_missing_taxa_and_write_final_files(
-    buscoDirs, fastaFiles,
-    fullTable, taxon_occupancy,
-    final_USCO_list, mafft_path,
-    trimAl_path, concat_fa, 
-    USCO_partition
-    ):
-    """
-    aligns and trims USCOs
+# def add_missing_taxa_and_write_final_files(
+#     buscoDirs, fastaFiles,
+#     fullTable, taxon_occupancy,
+#     final_USCO_list, mafft_path,
+#     trimAl_path, concat_fa, 
+#     USCO_partition
+#     ):
+#     """
+#     aligns and trims USCOs
 
-    Parameters
-    ----------
-    argv: buscoDirs
-        list of busco output dirs
-    argv: fastaFiles
-        list of of fasta files
-    argv: fullTable
-        list of full table busco output file names
-    argv: taxon_occupancy
-        value between 0 and 1 for taxon occupancy per USCO
-    argv: final_USCO_list
-        list of USCO ids that pass taxon occupancy criterion
-    argv: mafft_path
-        pathway to mafft program
-    argv: trimAl_path
-        pathway to trimAl program
-    argv: concat_fa
-        output file name for concat fa
-    argv: USCO_partition
-        output file name for the partition file
-    """
+#     Parameters
+#     ----------
+#     argv: buscoDirs
+#         list of busco output dirs
+#     argv: fastaFiles
+#         list of of fasta files
+#     argv: fullTable
+#         list of full table busco output file names
+#     argv: taxon_occupancy
+#         value between 0 and 1 for taxon occupancy per USCO
+#     argv: final_USCO_list
+#         list of USCO ids that pass taxon occupancy criterion
+#     argv: mafft_path
+#         pathway to mafft program
+#     argv: trimAl_path
+#         pathway to trimAl program
+#     argv: concat_fa
+#         output file name for concat fa
+#     argv: USCO_partition
+#         output file name for the partition file
+#     """
 
-    # initialize headerNames to store names of all indivs per fa
-    # , concat.fa file, dictionary to populate concat.fa with
-    headerNames = []
-    concatD     = {}
-    firstLen    = 1
-    secondLen   = 0
+#     # initialize headerNames to store names of all indivs per fa
+#     # , concat.fa file, dictionary to populate concat.fa with
+#     headerNames = []
+#     concatD     = {}
+#     firstLen    = 1
+#     secondLen   = 0
 
-    # loop through fasta files, read first line, save id
-    for fastas in fastaFiles:
-        with open(fastas, 'r') as f:
-            first_line = f.readline().strip()
-            first_line = re.sub(r'>', '', first_line)
-            first_line = re.sub(r'\|.*', '', first_line)
-            headerNames.append(first_line)
+#     # loop through fasta files, read first line, save id
+#     for fastas in fastaFiles:
+#         with open(fastas, 'r') as f:
+#             first_line = f.readline().strip()
+#             first_line = re.sub(r'>', '', first_line)
+#             first_line = re.sub(r'\|.*', '', first_line)
+#             headerNames.append(first_line)
     
-    # populate empty dictionary with no values and keys
-    # of the various indivs
-    concatD = {key: [] for key in headerNames}
+#     # populate empty dictionary with no values and keys
+#     # of the various indivs
+#     concatD = {key: [] for key in headerNames}
 
-    open(USCO_partition, "w")
-    # loop through USCO trimal files
-    for USCOid in final_USCO_list:
-        # list for keep track of taxa per USCO
-        USCOtaxa    = []
-        # used to store length of USCO alignment
-        USCOlen     = ''
-        USCOtrimal  = USCOid+".trimAl"
-        # used to store missing sequence to append
-        missing_seq = ''
-        # open trimal file
-        records = list(SeqIO.parse(USCOtrimal, "fasta"))
-        USCOlen = len(records[0].seq)
+#     open(USCO_partition, "w")
+#     # loop through USCO trimal files
+#     for USCOid in final_USCO_list:
+#         # list for keep track of taxa per USCO
+#         USCOtaxa    = []
+#         # used to store length of USCO alignment
+#         USCOlen     = ''
+#         USCOtrimal  = USCOid+".trimAl"
+#         # used to store missing sequence to append
+#         missing_seq = ''
+#         # open trimal file
+#         records = list(SeqIO.parse(USCOtrimal, "fasta"))
+#         USCOlen = len(records[0].seq)
 
-        # create lists of USCOtaxa and missing_taxa
-        for record in records:
-            # remove '|' till end of line and '>'
-            record.id = re.sub(r'\|.*', '', record.id)
-            record.description = re.sub(r'\|.*', '', record.id)
-            # append taxa per USCO to USCOtaxa
-            USCOtaxa.append(record.id)
-            # determine missing taxa
-            missing_taxa = list(set(USCOtaxa)^set(headerNames)) 
+#         # create lists of USCOtaxa and missing_taxa
+#         for record in records:
+#             # remove '|' till end of line and '>'
+#             record.id = re.sub(r'\|.*', '', record.id)
+#             record.description = re.sub(r'\|.*', '', record.id)
+#             # append taxa per USCO to USCOtaxa
+#             USCOtaxa.append(record.id)
+#             # determine missing taxa
+#             missing_taxa = list(set(USCOtaxa)^set(headerNames)) 
 
-        # create record for missing taxa
-        for taxa in missing_taxa:
-            missingSeq = USCOlen*'?'
-            taxaRecord = SeqRecord(Seq(missingSeq,IUPAC.protein), 
-                id = taxa, name = taxa, description = taxa)
-            concatD[taxa].append(taxaRecord.seq)
-        # create record for present data
-        for record in records:
-            if record.id in USCOtaxa:
-                concatD[record.id].append(record.seq)
-        # create partition file
-        with open(USCO_partition, "a") as f:
-            # second value in partition file
-            secondLen += USCOlen
-            entry = "AUTO, "+str(USCOid)+"="+str(firstLen)+"-"+str(secondLen)+"\n"
-            f.write(str(entry))
-            # add to first value for partition file
-            firstLen += USCOlen
+#         # create record for missing taxa
+#         for taxa in missing_taxa:
+#             missingSeq = USCOlen*'?'
+#             taxaRecord = SeqRecord(Seq(missingSeq,IUPAC.protein), 
+#                 id = taxa, name = taxa, description = taxa)
+#             concatD[taxa].append(taxaRecord.seq)
+#         # create record for present data
+#         for record in records:
+#             if record.id in USCOtaxa:
+#                 concatD[record.id].append(record.seq)
+#         # create partition file
+#         with open(USCO_partition, "a") as f:
+#             # second value in partition file
+#             secondLen += USCOlen
+#             entry = "AUTO, "+str(USCOid)+"="+str(firstLen)+"-"+str(secondLen)+"\n"
+#             f.write(str(entry))
+#             # add to first value for partition file
+#             firstLen += USCOlen
 
-    # join seqs of genes in value (list) and write to concat_fa   
-    with open(concat_fa, "w") as final_fasta_file: 
-        for x in concatD:
-            concatenated = Seq("", IUPAC.protein)
-            for s in concatD[x]:
-                concatenated += s
-            concatD[x] = concatenated
-            entry = '>'+x+"\n"+concatD[x]+"\n"
-            final_fasta_file.write(str(entry))
+#     # join seqs of genes in value (list) and write to concat_fa   
+#     with open(concat_fa, "w") as final_fasta_file: 
+#         for x in concatD:
+#             concatenated = Seq("", IUPAC.protein)
+#             for s in concatD[x]:
+#                 concatenated += s
+#             concatD[x] = concatenated
+#             entry = '>'+x+"\n"+concatD[x]+"\n"
+#             final_fasta_file.write(str(entry))
 
-def align_and_trim(
-    buscoDirs, fastaFiles,
-    fullTable, taxon_occupancy,
-    final_USCO_list, mafft_path,
-    trimAl_path, concat_fa, 
-    USCO_partition
-    ):
-    """
-    aligns and trims USCOs
+# def align_and_trim(
+#     buscoDirs, fastaFiles,
+#     fullTable, taxon_occupancy,
+#     final_USCO_list, mafft_path,
+#     trimAl_path, concat_fa, 
+#     USCO_partition
+#     ):
+#     """
+#     aligns and trims USCOs
 
-    Parameters
-    ----------
-    argv: buscoDirs
-        list of busco output dirs
-    argv: fastaFiles
-        list of of fasta files
-    argv: fullTable
-        list of full table busco output file names
-    argv: taxon_occupancy
-        value between 0 and 1 for taxon occupancy per USCO
-    argv: final_USCO_list
-        list of USCO ids that pass taxon occupancy criterion
-    argv: mafft_path
-        pathway to mafft program
-    argv: trimAl_path
-        pathway to trimAl program
-    argv: concat_fa
-        output file name for concat fa
-    argv: USCO_partition
-        output file name for the partition file
-    """
+#     Parameters
+#     ----------
+#     argv: buscoDirs
+#         list of busco output dirs
+#     argv: fastaFiles
+#         list of of fasta files
+#     argv: fullTable
+#         list of full table busco output file names
+#     argv: taxon_occupancy
+#         value between 0 and 1 for taxon occupancy per USCO
+#     argv: final_USCO_list
+#         list of USCO ids that pass taxon occupancy criterion
+#     argv: mafft_path
+#         pathway to mafft program
+#     argv: trimAl_path
+#         pathway to trimAl program
+#     argv: concat_fa
+#         output file name for concat fa
+#     argv: USCO_partition
+#         output file name for the partition file
+#     """
 
-    # initialize USCO fasta, mafft, and trimal variables
-    USCOfasta  = ''
-    USCOmafft  = ''
-    USCOlength = ''
+#     # initialize USCO fasta, mafft, and trimal variables
+#     USCOfasta  = ''
+#     USCOmafft  = ''
+#     USCOlength = ''
 
-    # align each USCOid fasta file
-    USCOlength = len(final_USCO_list)
-    for USCOid in final_USCO_list:
-        USCOfasta  = USCOid+".fa"
-        USCOmafft  = USCOid+".mafft"
-        USCOtrimal = USCOid+".trimAl"
-        # align
-        with open(USCOmafft, 'w') as f:
-            subprocess.call([mafft_path, '--reorder', '--bl', '62', 
-                '--op', '1.0', '--maxiterate', '1000', '--retree', '1', 
-                '--genafpair', '--quiet', USCOfasta], stdout = f)
+#     # align each USCOid fasta file
+#     USCOlength = len(final_USCO_list)
+#     for USCOid in final_USCO_list:
+#         USCOfasta  = USCOid+".fa"
+#         USCOmafft  = USCOid+".mafft"
+#         USCOtrimal = USCOid+".trimAl"
+#         # align
+#         with open(USCOmafft, 'w') as f:
+#             subprocess.call([mafft_path, '--reorder', '--bl', '62', 
+#                 '--op', '1.0', '--maxiterate', '1000', '--retree', '1', 
+#                 '--genafpair', '--quiet', USCOfasta], stdout = f)
 
-        # check 25 times if USCOs got aligned
-        for i in range(1,26):
-            # if the mafft file has size 0, realign the fa file
-            if os.stat(USCOmafft).st_size == 0:
-                # align
-                with open(USCOmafft, 'w') as f:
-                    subprocess.call([mafft_path, '--reorder', '--bl', '62', 
-                        '--op', '1.0', '--maxiterate', '1000', '--retree', '1', 
-                        '--genafpair', '--quiet', USCOfasta], stdout = f)
+#         # check 25 times if USCOs got aligned
+#         for i in range(1,26):
+#             # if the mafft file has size 0, realign the fa file
+#             if os.stat(USCOmafft).st_size == 0:
+#                 # align
+#                 with open(USCOmafft, 'w') as f:
+#                     subprocess.call([mafft_path, '--reorder', '--bl', '62', 
+#                         '--op', '1.0', '--maxiterate', '1000', '--retree', '1', 
+#                         '--genafpair', '--quiet', USCOfasta], stdout = f)
         
-        # trim
-        with open(USCOtrimal, 'w') as f:
-            subprocess.call([trimAl_path, '-in', USCOmafft, '-out', 
-                USCOtrimal, '-automated1'], stdout = f)
+#         # trim
+#         with open(USCOtrimal, 'w') as f:
+#             subprocess.call([trimAl_path, '-in', USCOmafft, '-out', 
+#                 USCOtrimal, '-automated1'], stdout = f)
 
-        # check 25 times if USCOs got trimmed
-        for i in range(1,26):
-            # if the mafft file has size 0, realign the fa file
-            if os.stat(USCOtrimal).st_size == 0:
-                # trim
-                with open(USCOtrimal, 'w') as f:
-                    subprocess.call([trimAl_path, '-in', USCOmafft, '-out', 
-                        USCOtrimal, '-automated1'], stdout = f)
+#         # check 25 times if USCOs got trimmed
+#         for i in range(1,26):
+#             # if the mafft file has size 0, realign the fa file
+#             if os.stat(USCOtrimal).st_size == 0:
+#                 # trim
+#                 with open(USCOtrimal, 'w') as f:
+#                     subprocess.call([trimAl_path, '-in', USCOmafft, '-out', 
+#                         USCOtrimal, '-automated1'], stdout = f)
         
-    add_missing_taxa_and_write_final_files(
-        buscoDirs, fastaFiles,
-        fullTable, taxon_occupancy,
-        final_USCO_list, mafft_path,
-        trimAl_path, concat_fa, 
-        USCO_partition
-        )
+#     add_missing_taxa_and_write_final_files(
+#         buscoDirs, fastaFiles,
+#         fullTable, taxon_occupancy,
+#         final_USCO_list, mafft_path,
+#         trimAl_path, concat_fa, 
+#         USCO_partition
+#         )
 
 
 
@@ -268,13 +268,13 @@ def create_fas_per_USCO(
                         with open(USCOfasta, "a") as output_handle:
                             SeqIO.write(fasta_dict[line[2]], output_handle, format)
 
-    align_and_trim(
-        buscoDirs, fastaFiles,
-        fullTable, taxon_occupancy,
-        final_USCO_list, mafft_path,
-        trimAl_path, concat_fa, 
-        USCO_partition
-        )                            
+    # align_and_trim(
+    #     buscoDirs, fastaFiles,
+    #     fullTable, taxon_occupancy,
+    #     final_USCO_list, mafft_path,
+    #     trimAl_path, concat_fa, 
+    #     USCO_partition
+    #     )                            
 
 def determine_USCOs(
     buscoDirs, fastaFiles,

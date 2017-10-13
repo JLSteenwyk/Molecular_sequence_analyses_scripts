@@ -70,7 +70,7 @@ def add_missing_taxa_and_write_final_files(
         USCOtaxa    = []
         # used to store length of USCO alignment
         USCOlen     = ''
-        USCOtrimal  = USCOid+".trimAl"
+        USCOtrimal  = USCOid+".fa.mafft.trimal"
         # used to store missing sequence to append
         missing_seq = ''
         # open trimal file
@@ -148,46 +148,46 @@ def align_and_trim(
         output file name for the partition file
     """
 
-    # initialize USCO fasta, mafft, and trimal variables
-    USCOfasta  = ''
-    USCOmafft  = ''
-    USCOlength = ''
+    # # initialize USCO fasta, mafft, and trimal variables
+    # USCOfasta  = ''
+    # USCOmafft  = ''
+    # USCOlength = ''
 
-    # align each USCOid fasta file
-    USCOlength = len(final_USCO_list)
-    for USCOid in final_USCO_list:
-        USCOfasta  = USCOid+".fa"
-        USCOmafft  = USCOid+".mafft"
-        USCOtrimal = USCOid+".trimAl"
-        # align
-        with open(USCOmafft, 'w') as f:
-            subprocess.call([mafft_path, '--reorder', '--bl', '62', 
-                '--op', '1.0', '--maxiterate', '1000', '--retree', '1', 
-                '--genafpair', '--quiet', USCOfasta], stdout = f)
+    # # align each USCOid fasta file
+    # USCOlength = len(final_USCO_list)
+    # for USCOid in final_USCO_list:
+    #     USCOfasta  = USCOid+".fa"
+    #     USCOmafft  = USCOid+".mafft"
+    #     USCOtrimal = USCOid+".trimAl"
+    #     # align
+    #     with open(USCOmafft, 'w') as f:
+    #         subprocess.call([mafft_path, '--reorder', '--bl', '62', 
+    #             '--op', '1.0', '--maxiterate', '1000', '--retree', '1', 
+    #             '--genafpair', '--quiet', USCOfasta], stdout = f)
 
-        # check 25 times if USCOs got aligned
-        for i in range(1,26):
-            # if the mafft file has size 0, realign the fa file
-            if os.stat(USCOmafft).st_size == 0:
-                # align
-                with open(USCOmafft, 'w') as f:
-                    subprocess.call([mafft_path, '--reorder', '--bl', '62', 
-                        '--op', '1.0', '--maxiterate', '1000', '--retree', '1', 
-                        '--genafpair', '--quiet', USCOfasta], stdout = f)
+    #     # check 25 times if USCOs got aligned
+    #     for i in range(1,26):
+    #         # if the mafft file has size 0, realign the fa file
+    #         if os.stat(USCOmafft).st_size == 0:
+    #             # align
+    #             with open(USCOmafft, 'w') as f:
+    #                 subprocess.call([mafft_path, '--reorder', '--bl', '62', 
+    #                     '--op', '1.0', '--maxiterate', '1000', '--retree', '1', 
+    #                     '--genafpair', '--quiet', USCOfasta], stdout = f)
         
-        # trim
-        with open(USCOtrimal, 'w') as f:
-            subprocess.call([trimAl_path, '-in', USCOmafft, '-out', 
-                USCOtrimal, '-automated1'], stdout = f)
+    #     # trim
+    #     with open(USCOtrimal, 'w') as f:
+    #         subprocess.call([trimAl_path, '-in', USCOmafft, '-out', 
+    #             USCOtrimal, '-automated1'], stdout = f)
 
-        # check 25 times if USCOs got trimmed
-        for i in range(1,26):
-            # if the mafft file has size 0, realign the fa file
-            if os.stat(USCOtrimal).st_size == 0:
-                # trim
-                with open(USCOtrimal, 'w') as f:
-                    subprocess.call([trimAl_path, '-in', USCOmafft, '-out', 
-                        USCOtrimal, '-automated1'], stdout = f)
+    #     # check 25 times if USCOs got trimmed
+    #     for i in range(1,26):
+    #         # if the mafft file has size 0, realign the fa file
+    #         if os.stat(USCOtrimal).st_size == 0:
+    #             # trim
+    #             with open(USCOtrimal, 'w') as f:
+    #                 subprocess.call([trimAl_path, '-in', USCOmafft, '-out', 
+    #                     USCOtrimal, '-automated1'], stdout = f)
         
     add_missing_taxa_and_write_final_files(
         buscoDirs, fastaFiles,
@@ -233,40 +233,40 @@ def create_fas_per_USCO(
         output file name for the partition file
     """
 
-    # initialize variable for fastaFiles len
-    fastaFilesLength = ''
-    # create empty files to populate fasta seqs to
-    for USCOid in final_USCO_list:
-        USCOfasta = USCOid+".fa"
-        open(USCOfasta, "w")
+    # # initialize variable for fastaFiles len
+    # fastaFilesLength = ''
+    # # create empty files to populate fasta seqs to
+    # for USCOid in final_USCO_list:
+    #     USCOfasta = USCOid+".fa"
+    #     open(USCOfasta, "w")
 
-    # loop through list of USCOs that pass taxon occupancy
-    fastaFilesLength = len(fastaFiles)
-    for directory, fastas, table in zip(buscoDirs, fastaFiles, fullTable):
-        # open busco output table
-        tableFileName = directory+"/"+table
-        # check if tableFileName exists and exit if not
-        if os.path.isfile(tableFileName):
-            1
-        else:
-            print(tableFileName)
-            print("File does not exist. Check order of busco_out and fasta_files")
-            sys.exit()
-        # open busco full table and append to USCOfasta if complete
-        with open(tableFileName, "r") as f:
-            # open fasta file
-            format     = "fasta"
-            handle     = open(fastas)
-            fasta_dict = SeqIO.to_dict(SeqIO.parse(handle, format))
-            # loop through busco output table and get gene ID associated with USCO ID
-            for line in f:
-                if not line.startswith("#"):
-                    line = re.split(r'\t+', line.rstrip('\n'))
-                    # if USCO id is present in single copy, add it to fasta file of USCOs
-                    if (line[0] in final_USCO_list) and (line[1] == "Complete"):
-                        USCOfasta = line[0]+".fa"
-                        with open(USCOfasta, "a") as output_handle:
-                            SeqIO.write(fasta_dict[line[2]], output_handle, format)
+    # # loop through list of USCOs that pass taxon occupancy
+    # fastaFilesLength = len(fastaFiles)
+    # for directory, fastas, table in zip(buscoDirs, fastaFiles, fullTable):
+    #     # open busco output table
+    #     tableFileName = directory+"/"+table
+    #     # check if tableFileName exists and exit if not
+    #     if os.path.isfile(tableFileName):
+    #         1
+    #     else:
+    #         print(tableFileName)
+    #         print("File does not exist. Check order of busco_out and fasta_files")
+    #         sys.exit()
+    #     # open busco full table and append to USCOfasta if complete
+    #     with open(tableFileName, "r") as f:
+    #         # open fasta file
+    #         format     = "fasta"
+    #         handle     = open(fastas)
+    #         fasta_dict = SeqIO.to_dict(SeqIO.parse(handle, format))
+    #         # loop through busco output table and get gene ID associated with USCO ID
+    #         for line in f:
+    #             if not line.startswith("#"):
+    #                 line = re.split(r'\t+', line.rstrip('\n'))
+    #                 # if USCO id is present in single copy, add it to fasta file of USCOs
+    #                 if (line[0] in final_USCO_list) and (line[1] == "Complete"):
+    #                     USCOfasta = line[0]+".fa"
+    #                     with open(USCOfasta, "a") as output_handle:
+    #                         SeqIO.write(fasta_dict[line[2]], output_handle, format)
 
     align_and_trim(
         buscoDirs, fastaFiles,

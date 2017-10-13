@@ -65,6 +65,25 @@ python3
 Basic usage: python Calculate_distance_between_two_taxa.py -i newick_tree_file -o taxa1 -t taxa2 <br />
 Original author: [Jacob Steenwyk](https://jsteenwyk.github.io/)
 
+### Calculate_pairwise_distances_among_taxa.py
+Calculates all pairwise phylogenetic distances between two taxa in a newick tree file.
+Taxa names are provided as a secondary file where taxa names are a single column. <br />
+For detailed information use the -h argument <br />
+```
+python3
+|- sys
+|- getopt
+|- os.path
+|- re
+|- Bio
+   |- Phylo
+      |- BaseTree
+         |- TreeMixin
+|- itertools
+```
+Basic usage: python Calculate_pairwise_distances_among_taxa.py -i newick_tree_file -l target_taxa_list <br />
+Original author: [Jacob Steenwyk](https://jsteenwyk.github.io/)
+
 ### calculate_average_protein_sequence_identity.bash
 Calculates the average protein sequence identity between two whole genome
 protein fasta files representing two different strains or species. This
