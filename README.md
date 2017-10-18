@@ -1,7 +1,7 @@
 # Scripts to enable phylogenetic, molecular, and related analyses
 
 This repository houses numerous scripts to facilitate the analyses of phylogenetic trees and fasta files
-
+Jacob Steenwyk
 ## Scripts
 
 A short description of each script
