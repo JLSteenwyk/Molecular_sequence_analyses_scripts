@@ -209,13 +209,18 @@ python3
 Basic usage: python busco_occupancy.py -b busco_output_dirs -o output_file<br />
 Original author: [Jacob Steenwyk](https://jsteenwyk.github.io/)
 
-### remove_column_from_alignment.pl
-Removes column from an alignment fasta file. Columns to remove should be specified as the first argument where columns are separated by a comma (,).
+### GC_content.py and AT_content.py
+Takes a nucleotide fasta file as the first and only argument and determines the GC (or AT) content of the entirety of the file. This is used to determine genome GC (or AT) content.
 ```
-perl v5.10.1
+python3
+|- sys
+|- getopt
+|- os.path
+|- math
+|- re
 ```
-Basic usage: perl remove_column_from_alignment.pl x,y,z alignment.fa <br />
-Original author: [JC](https://www.biostars.org/p/55555/)
+Basic usage: python GC_content.py nucleotide.fasta<br />
+Original author: [Jacob Steenwyk](https://jsteenwyk.github.io/)
 
 ## Authors
 
