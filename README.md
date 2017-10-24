@@ -219,7 +219,7 @@ python3
 |- math
 |- re
 ```
-Basic usage: python GC_content.py nucleotide.fasta<br />
+Basic usage: python GC_content.py nucleotide.fasta or python AT_content.py nucleotide.fasta<br />
 Original author: [Jacob Steenwyk](https://jsteenwyk.github.io/)
 
 ## Authors
