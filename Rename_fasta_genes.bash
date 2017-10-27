@@ -20,7 +20,7 @@ FA_file_KEY=$(echo $FA_file | sed 's/.fa//g' | awk '{print $1"_gene_names.txt"}'
 echo $FA_file_MOD $FA_file_KEY
 
 echo -e "Creating mod fasta file using fa file $FA_file and spp ID $Spp_ID\n..."
-awk -v var="$Spp_ID" '/^>/{print ">"var"@" ++i-1; next}{print}' $FA_file > $FA_file_MOD
+awk -v var="$Spp_ID" '/^>/{print ">"var"|" ++i-1; next}{print}' $FA_file > $FA_file_MOD
 echo -e "Complete"
 
 echo -e "Creating key file named $FA_file_KEY\n..."
