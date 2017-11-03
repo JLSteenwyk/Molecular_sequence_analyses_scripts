@@ -222,6 +222,22 @@ python3
 Basic usage: python GC_content.py nucleotide.fasta or python AT_content.py nucleotide.fasta<br />
 Original author: [Jacob Steenwyk](https://jsteenwyk.github.io/)
 
+### consensus_sequence_generator.py
+Takes a multiple sequence alignment fasta file and a specified threshold value to create a consensus sequence among sequences. The threshold value should be between 0 and 1 representing 0-100% threshold for minimum AA present in a column to be considered the consensus.
+```
+python3
+|- sys
+|- getopt
+|- os.path
+|- os
+|- Bio
+   |- AlignIO
+   |- Align
+      |- AlignInfo
+```
+Basic usage: python consensus_sequence_generator.py -i protein.MSA.fasta -t threshold<br />
+Original author: [Jacob Steenwyk](https://jsteenwyk.github.io/)
+
 ## Authors
 
 * **Jacob Steenwyk** - [Github page](https://jsteenwyk.github.io/)
