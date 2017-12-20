@@ -38,6 +38,7 @@ def create_output_file(
         
         for busco in all_buscos:
             for taxa in taxa_list:
+                #print(taxa, busco)
                 fin_dict[busco].append(dict_of_dicts[busco][taxa])
         
         for key, value in fin_dict.items():
@@ -70,7 +71,7 @@ def create_USCOs_dod(
             for line in f:
                 if not line.startswith("#"):
                     line = re.split(r'\t+', line.rstrip('\n'))
-                    if len(line) >= 3:
+                    if (len(line) >= 3) and (line[1] != "Fragmented"):
                         line[2] = line[2].split('|',1)[0]
                         if line[0] not in occupancyD:
                             occupancyD[line[0]] = [line[2]]
@@ -80,12 +81,8 @@ def create_USCOs_dod(
                             taxa_list.append(line[2])
 
     # save all BUSCO ids to list based on the last tableFileName
-    tableFileNameL = directory+"/"+table
-    with open(tableFileName, "r") as f:
-        for line in f:
-            if not line.startswith("#"):
-                line = re.split(r'\t+', line.rstrip('\n'))
-                all_buscos.append(line[0])
+    for k,v in occupancyD.items():
+        all_buscos.append(k)
     # remove duplicates
     all_buscos=list(set(all_buscos))
 
