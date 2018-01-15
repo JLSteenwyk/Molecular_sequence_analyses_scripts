@@ -99,7 +99,79 @@ def find_snps(
         for k, v in cladeOutD.items():
             cladeOutseg += (v[i:i+int(window)])
        
-        ## clade 1 Ts
+        ## clade 1 As
+        # test if clade1seg only contains As and clade2seg only contains As
+        if (set(str(clade1seg)) <= A) and (set(str(clade2seg)) <= A):
+            ## print window that contains indel and concatenated string from both clades
+            #print(i, i+int(window), "A->T", str(clade1seg), str(clade2seg), str(cladeOutseg))
+
+            ## test if cladeOutseg contains A, T, C, G, N, gaps, or a combination
+            # As in outgroup seg
+            if any(x in cladeOutseg for x in set(A)) and not any(x in cladeOutseg for x in set(butA)):
+                1
+            # Ts in outgroup seg
+            elif any(x in cladeOutseg for x in set(T)) and not any(x in cladeOutseg for x in set(butT)):
+                # append pertinent information to indel_arr
+                temp_list = []
+                # start
+                temp_list.append(i)
+                # stop
+                temp_list.append(i+int(window))
+                # clade 1
+                temp_list.append("A")
+                # clade 2
+                temp_list.append("A")
+                # outgroup
+                temp_list.append("T")
+                # class
+                temp_list.append("C1C2")
+                # C1type
+                temp_list.append("Tv")
+                # C2type
+                temp_list.append("Tv")
+                snp_arr.append(temp_list)
+            # Gs in outgroup seg
+            elif any(x in cladeOutseg for x in set(G)) and not any(x in cladeOutseg for x in set(butG)):
+                # append pertinent information to indel_arr
+                temp_list = []
+                # start
+                temp_list.append(i)
+                # stop
+                temp_list.append(i+int(window))
+                # clade 1
+                temp_list.append("A")
+                # clade 2
+                temp_list.append("A")
+                # outgroup
+                temp_list.append("G")
+                # class
+                temp_list.append("C1C2")
+                # C1type
+                temp_list.append("Ts")
+                # C2type
+                temp_list.append("Ts")
+                snp_arr.append(temp_list)
+            elif any(x in cladeOutseg for x in set(C)) and not any(x in cladeOutseg for x in set(butC)):
+                # append pertinent information to indel_arr
+                temp_list = []
+                # start
+                temp_list.append(i)
+                # stop
+                temp_list.append(i+int(window))
+                # clade 1
+                temp_list.append("A")
+                # clade 2
+                temp_list.append("A")
+                # outgroup
+                temp_list.append("C")
+                # class
+                temp_list.append("C1C2")
+                # C1type
+                temp_list.append("Tv")
+                # C2type
+                temp_list.append("Tv")
+                snp_arr.append(temp_list)
+
         # test if clade1seg only contains As and clade2seg only contains Ts
         if (set(str(clade1seg)) <= A) and (set(str(clade2seg)) <= T):
             ## print window that contains indel and concatenated string from both clades
@@ -371,6 +443,78 @@ def find_snps(
                 snp_arr.append(temp_list)  
 
         ## clade 1 Ts
+        # test if clade1seg only contains Ts and clade2seg only contains Ts
+        elif (set(str(clade1seg)) <= T) and (set(str(clade2seg)) <= T):
+            ## print window that contains indel and concatenated string from both clades
+            #print(i, i+int(window), "A->T", str(clade1seg), str(clade2seg), str(cladeOutseg))
+
+            ## test if cladeOutseg contains A, T, C, G, N, gaps, or a combination
+            # As in outgroup seg
+            if any(x in cladeOutseg for x in set(A)) and not any(x in cladeOutseg for x in set(butA)):
+                # append pertinent information to indel_arr
+                temp_list = []
+                # start
+                temp_list.append(i)
+                # stop
+                temp_list.append(i+int(window))
+                # clade 1
+                temp_list.append("T")
+                # clade 2
+                temp_list.append("T")
+                # outgroup
+                temp_list.append("A")
+                # class
+                temp_list.append("C1C2")
+                # C1type
+                temp_list.append("Tv")
+                # C2type
+                temp_list.append("Tv")
+                snp_arr.append(temp_list)
+            # Ts in outgroup seg
+            elif any(x in cladeOutseg for x in set(T)) and not any(x in cladeOutseg for x in set(butT)):
+                1
+            # Gs in outgroup seg
+            elif any(x in cladeOutseg for x in set(G)) and not any(x in cladeOutseg for x in set(butG)):
+                # append pertinent information to indel_arr
+                temp_list = []
+                # start
+                temp_list.append(i)
+                # stop
+                temp_list.append(i+int(window))
+                # clade 1
+                temp_list.append("T")
+                # clade 2
+                temp_list.append("T")
+                # outgroup
+                temp_list.append("G")
+                # class
+                temp_list.append("C1C2")
+                # C1type
+                temp_list.append("Tv")
+                # C2type
+                temp_list.append("Tv")
+                snp_arr.append(temp_list)
+            elif any(x in cladeOutseg for x in set(C)) and not any(x in cladeOutseg for x in set(butC)):
+                # append pertinent information to indel_arr
+                temp_list = []
+                # start
+                temp_list.append(i)
+                # stop
+                temp_list.append(i+int(window))
+                # clade 1
+                temp_list.append("T")
+                # clade 2
+                temp_list.append("T")
+                # outgroup
+                temp_list.append("C")
+                # class
+                temp_list.append("C1C2")
+                # C1type
+                temp_list.append("Ts")
+                # C2type
+                temp_list.append("Ts")
+                snp_arr.append(temp_list)
+
         # test if clade1seg only contains Ts and clade2seg only contains As
         elif (set(str(clade1seg)) <= T) and (set(str(clade2seg)) <= A):
             ## print window that contains indel and concatenated string from both clades
@@ -642,6 +786,78 @@ def find_snps(
                 snp_arr.append(temp_list)
 
         ## clade 1 Gs
+        # test if clade1seg only contains Gs and clade2seg only contains Gs
+        elif (set(str(clade1seg)) <= G) and (set(str(clade2seg)) <= G):
+            ## print window that contains indel and concatenated string from both clades
+            #print(i, i+int(window), "A->T", str(clade1seg), str(clade2seg), str(cladeOutseg))
+
+            ## test if cladeOutseg contains A, T, C, G, N, gaps, or a combination
+            # As in outgroup seg
+            if any(x in cladeOutseg for x in set(A)) and not any(x in cladeOutseg for x in set(butA)):
+                # append pertinent information to indel_arr
+                temp_list = []
+                # start
+                temp_list.append(i)
+                # stop
+                temp_list.append(i+int(window))
+                # clade 1
+                temp_list.append("G")
+                # clade 2
+                temp_list.append("G")
+                # outgroup
+                temp_list.append("A")
+                # class
+                temp_list.append("C1C2")
+                # C1type
+                temp_list.append("Ts")
+                # C2type
+                temp_list.append("Ts")
+                snp_arr.append(temp_list)
+            # Ts in outgroup seg
+            elif any(x in cladeOutseg for x in set(T)) and not any(x in cladeOutseg for x in set(butT)):
+                # append pertinent information to indel_arr
+                temp_list = []
+                # start
+                temp_list.append(i)
+                # stop
+                temp_list.append(i+int(window))
+                # clade 1
+                temp_list.append("G")
+                # clade 2
+                temp_list.append("G")
+                # outgroup
+                temp_list.append("T")
+                # class
+                temp_list.append("C1C2")
+                # C1type
+                temp_list.append("Tv")
+                # C2type
+                temp_list.append("Tv")
+                snp_arr.append(temp_list)
+            # Gs in outgroup seg
+            elif any(x in cladeOutseg for x in set(G)) and not any(x in cladeOutseg for x in set(butG)):
+                1
+            elif any(x in cladeOutseg for x in set(C)) and not any(x in cladeOutseg for x in set(butC)):
+                # append pertinent information to indel_arr
+                temp_list = []
+                # start
+                temp_list.append(i)
+                # stop
+                temp_list.append(i+int(window))
+                # clade 1
+                temp_list.append("G")
+                # clade 2
+                temp_list.append("G")
+                # outgroup
+                temp_list.append("C")
+                # class
+                temp_list.append("C1C2")
+                # C1type
+                temp_list.append("Tv")
+                # C2type
+                temp_list.append("Tv")
+                snp_arr.append(temp_list)
+
         # test if clade1seg only contains Gs and clade2seg only contains As
         elif (set(str(clade1seg)) <= G) and (set(str(clade2seg)) <= A):
             ## print window that contains indel and concatenated string from both clades
@@ -913,6 +1129,78 @@ def find_snps(
                 snp_arr.append(temp_list)  
 
         ## clade 1 Cs
+        # test if clade1seg only contains Cs and clade2seg only contains Cs
+        elif (set(str(clade1seg)) <= C) and (set(str(clade2seg)) <= C):
+            ## print window that contains indel and concatenated string from both clades
+            #print(i, i+int(window), "A->T", str(clade1seg), str(clade2seg), str(cladeOutseg))
+
+            ## test if cladeOutseg contains A, T, C, G, N, gaps, or a combination
+            # As in outgroup seg
+            if any(x in cladeOutseg for x in set(A)) and not any(x in cladeOutseg for x in set(butA)):
+                # append pertinent information to indel_arr
+                temp_list = []
+                # start
+                temp_list.append(i)
+                # stop
+                temp_list.append(i+int(window))
+                # clade 1
+                temp_list.append("C")
+                # clade 2
+                temp_list.append("C")
+                # outgroup
+                temp_list.append("A")
+                # class
+                temp_list.append("C1")
+                # C1type
+                temp_list.append("Tv")
+                # C2type
+                temp_list.append("Tv")
+                snp_arr.append(temp_list)
+            # Ts in outgroup seg
+            elif any(x in cladeOutseg for x in set(T)) and not any(x in cladeOutseg for x in set(butT)):
+                # append pertinent information to indel_arr
+                temp_list = []
+                # start
+                temp_list.append(i)
+                # stop
+                temp_list.append(i+int(window))
+                # clade 1
+                temp_list.append("C")
+                # clade 2
+                temp_list.append("C")
+                # outgroup
+                temp_list.append("T")
+                # class
+                temp_list.append("C1C2")
+                # C1type
+                temp_list.append("Ts")
+                # C2type
+                temp_list.append("Ts")
+                snp_arr.append(temp_list)
+            # Gs in outgroup seg
+            elif any(x in cladeOutseg for x in set(G)) and not any(x in cladeOutseg for x in set(butG)):
+                # append pertinent information to indel_arr
+                temp_list = []
+                # start
+                temp_list.append(i)
+                # stop
+                temp_list.append(i+int(window))
+                # clade 1
+                temp_list.append("C")
+                # clade 2
+                temp_list.append("C")
+                # outgroup
+                temp_list.append("G")
+                # class
+                temp_list.append("C1C2")
+                # C1type
+                temp_list.append("Tv")
+                # C2type
+                temp_list.append("Tv")
+                snp_arr.append(temp_list)
+            elif any(x in cladeOutseg for x in set(C)) and not any(x in cladeOutseg for x in set(butC)):
+                1
+
         # test if clade1seg only contains Cs and clade2seg only contains As
         elif (set(str(clade1seg)) <= C) and (set(str(clade2seg)) <= A):
             ## print window that contains indel and concatenated string from both clades
