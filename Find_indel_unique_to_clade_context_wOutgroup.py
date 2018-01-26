@@ -69,7 +69,7 @@ def find_indels(
     length    = len(alignment[0].seq)
 
     # DNA acid single letters and gap set
-    nts       = set('ATCGNatcgn')
+    nts       = set('ATCGNatcgnRrYySsWwKkMmBbDdHhVv')
     gap       = set('-')
 
     # intialize list for np array of continuous identified indels
@@ -297,8 +297,7 @@ def main(
             # window size explanation
             print("\n-w\twindow size:")
             print("\tspecifies the number of nucleotides to be analyzing at once")
-            # clade 1 file explanation
-            print("\n-o\tclade 1 of interest:")
+            # clade 1 file explanation-o\tclade 1 of interest:")
             print("\ta single column file with the fasta header names from clade 1")
             print("\tof interest. If the names do not match the fasta header, they")
             print("\twill not be recognized and accounted for.")
