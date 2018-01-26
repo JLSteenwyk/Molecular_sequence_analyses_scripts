@@ -476,7 +476,7 @@ def main(
             print("\t  - C1type refers to if the SNP found at C1 is a Transition (Ts) or")
             print("\t\tor Transversion (Tv). If no SNP is found, the column will contain NA")
             print("\t  - pos refers to the position of the SNP in a codon. That is, is the SNP in")
-            print("\t\tthe wobble position (3rd) or the 1st or 2nd position.")
+            print("\t\tthe wobble position (3rd) or the 1st or 2nd position.\n")
             sys.exit()
         elif opt == '-o':
             if arg:
