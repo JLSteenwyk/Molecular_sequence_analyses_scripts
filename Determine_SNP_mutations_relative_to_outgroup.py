@@ -82,7 +82,7 @@ def find_snps(
     butG = set('AaTtCcNn-')
 
     # intialize list for np array of continuous identified indels
-    snp_arr = [['start','stop','C1','C2','OG','class','C1type','C2type']]
+    snp_arr = [['start','stop','C1','C2','OG','class','C1type','C2type','pos']]
 
     # loop through aligned sequence using step size
     for i in range(0, (int(length)+1) - int(step), int(step)):
@@ -129,6 +129,13 @@ def find_snps(
                 temp_list.append("Tv")
                 # C2type
                 temp_list.append("Tv")
+                # determine position of snp in codon
+                if (i+int(window))%3==0:
+                    temp_list.append("3rd")
+                elif (i+int(window))%3==1:
+                    temp_list.append("1st")
+                elif (i+int(window))%3==2:
+                    temp_list.append("2nd")
                 snp_arr.append(temp_list)
             # Gs in outgroup seg
             elif any(x in cladeOutseg for x in set(G)) and not any(x in cladeOutseg for x in set(butG)):
@@ -150,6 +157,13 @@ def find_snps(
                 temp_list.append("Ts")
                 # C2type
                 temp_list.append("Ts")
+                # determine position of snp in codon
+                if (i+int(window))%3==0:
+                    temp_list.append("3rd")
+                elif (i+int(window))%3==1:
+                    temp_list.append("1st")
+                elif (i+int(window))%3==2:
+                    temp_list.append("2nd")
                 snp_arr.append(temp_list)
             elif any(x in cladeOutseg for x in set(C)) and not any(x in cladeOutseg for x in set(butC)):
                 # append pertinent information to indel_arr
@@ -170,6 +184,13 @@ def find_snps(
                 temp_list.append("Tv")
                 # C2type
                 temp_list.append("Tv")
+                # determine position of snp in codon
+                if (i+int(window))%3==0:
+                    temp_list.append("3rd")
+                elif (i+int(window))%3==1:
+                    temp_list.append("1st")
+                elif (i+int(window))%3==2:
+                    temp_list.append("2nd")
                 snp_arr.append(temp_list)
 
         # test if clade1seg only contains As and clade2seg only contains Ts
@@ -198,6 +219,13 @@ def find_snps(
                 temp_list.append("NA")
                 # C2type
                 temp_list.append("Tv")
+                # determine position of snp in codon
+                if (i+int(window))%3==0:
+                    temp_list.append("3rd")
+                elif (i+int(window))%3==1:
+                    temp_list.append("1st")
+                elif (i+int(window))%3==2:
+                    temp_list.append("2nd")
                 snp_arr.append(temp_list)
             # Ts in outgroup seg
             elif any(x in cladeOutseg for x in set(T)) and not any(x in cladeOutseg for x in set(butT)):
@@ -219,6 +247,13 @@ def find_snps(
                 temp_list.append("Tv")
                 # C2type
                 temp_list.append("NA")
+                # determine position of snp in codon
+                if (i+int(window))%3==0:
+                    temp_list.append("3rd")
+                elif (i+int(window))%3==1:
+                    temp_list.append("1st")
+                elif (i+int(window))%3==2:
+                    temp_list.append("2nd")
                 snp_arr.append(temp_list)
             # Gs in outgroup seg
             elif any(x in cladeOutseg for x in set(G)) and not any(x in cladeOutseg for x in set(butG)):
@@ -240,6 +275,13 @@ def find_snps(
                 temp_list.append("Ts")
                 # C2type
                 temp_list.append("Tv")
+                # determine position of snp in codon
+                if (i+int(window))%3==0:
+                    temp_list.append("3rd")
+                elif (i+int(window))%3==1:
+                    temp_list.append("1st")
+                elif (i+int(window))%3==2:
+                    temp_list.append("2nd")
                 snp_arr.append(temp_list)
             elif any(x in cladeOutseg for x in set(C)) and not any(x in cladeOutseg for x in set(butC)):
                 # append pertinent information to indel_arr
@@ -260,6 +302,13 @@ def find_snps(
                 temp_list.append("Tv")
                 # C2type
                 temp_list.append("Ts")
+                # determine position of snp in codon
+                if (i+int(window))%3==0:
+                    temp_list.append("3rd")
+                elif (i+int(window))%3==1:
+                    temp_list.append("1st")
+                elif (i+int(window))%3==2:
+                    temp_list.append("2nd")
                 snp_arr.append(temp_list)
 
         # test if clade1seg only contains As and clade2seg only contains Gs
@@ -288,6 +337,13 @@ def find_snps(
                 temp_list.append("NA")
                 # C2type
                 temp_list.append("Ts")
+                # determine position of snp in codon
+                if (i+int(window))%3==0:
+                    temp_list.append("3rd")
+                elif (i+int(window))%3==1:
+                    temp_list.append("1st")
+                elif (i+int(window))%3==2:
+                    temp_list.append("2nd")
                 snp_arr.append(temp_list)
             # Ts in outgroup seg
             elif any(x in cladeOutseg for x in set(T)) and not any(x in cladeOutseg for x in set(butT)):
@@ -309,6 +365,13 @@ def find_snps(
                 temp_list.append("Tv")
                 # C2type
                 temp_list.append("Tv")
+                # determine position of snp in codon
+                if (i+int(window))%3==0:
+                    temp_list.append("3rd")
+                elif (i+int(window))%3==1:
+                    temp_list.append("1st")
+                elif (i+int(window))%3==2:
+                    temp_list.append("2nd")
                 snp_arr.append(temp_list)
             # Gs in outgroup seg
             elif any(x in cladeOutseg for x in set(G)) and not any(x in cladeOutseg for x in set(butG)):
@@ -330,6 +393,13 @@ def find_snps(
                 temp_list.append("Ts")
                 # C2type
                 temp_list.append("NA")
+                # determine position of snp in codon
+                if (i+int(window))%3==0:
+                    temp_list.append("3rd")
+                elif (i+int(window))%3==1:
+                    temp_list.append("1st")
+                elif (i+int(window))%3==2:
+                    temp_list.append("2nd")
                 snp_arr.append(temp_list)
             elif any(x in cladeOutseg for x in set(C)) and not any(x in cladeOutseg for x in set(butC)):
                 # append pertinent information to indel_arr
@@ -350,6 +420,13 @@ def find_snps(
                 temp_list.append("Tv")
                 # C2type
                 temp_list.append("Tv")
+                # determine position of snp in codon
+                if (i+int(window))%3==0:
+                    temp_list.append("3rd")
+                elif (i+int(window))%3==1:
+                    temp_list.append("1st")
+                elif (i+int(window))%3==2:
+                    temp_list.append("2nd")
                 snp_arr.append(temp_list) 
 
         # test if clade1seg only contains As and clade2seg only contains Cs
@@ -378,6 +455,13 @@ def find_snps(
                 temp_list.append("NA")
                 # C2type
                 temp_list.append("Tv")
+                # determine position of snp in codon
+                if (i+int(window))%3==0:
+                    temp_list.append("3rd")
+                elif (i+int(window))%3==1:
+                    temp_list.append("1st")
+                elif (i+int(window))%3==2:
+                    temp_list.append("2nd")
                 snp_arr.append(temp_list)
             # Ts in outgroup seg
             elif any(x in cladeOutseg for x in set(T)) and not any(x in cladeOutseg for x in set(butT)):
@@ -399,6 +483,13 @@ def find_snps(
                 temp_list.append("Tv")
                 # C2type
                 temp_list.append("Ts")
+                # determine position of snp in codon
+                if (i+int(window))%3==0:
+                    temp_list.append("3rd")
+                elif (i+int(window))%3==1:
+                    temp_list.append("1st")
+                elif (i+int(window))%3==2:
+                    temp_list.append("2nd")
                 snp_arr.append(temp_list)
             # Gs in outgroup seg
             elif any(x in cladeOutseg for x in set(G)) and not any(x in cladeOutseg for x in set(butG)):
@@ -420,6 +511,13 @@ def find_snps(
                 temp_list.append("Ts")
                 # C2type
                 temp_list.append("Tv")
+                # determine position of snp in codon
+                if (i+int(window))%3==0:
+                    temp_list.append("3rd")
+                elif (i+int(window))%3==1:
+                    temp_list.append("1st")
+                elif (i+int(window))%3==2:
+                    temp_list.append("2nd")
                 snp_arr.append(temp_list)
             elif any(x in cladeOutseg for x in set(C)) and not any(x in cladeOutseg for x in set(butC)):
                 # append pertinent information to indel_arr
@@ -440,6 +538,13 @@ def find_snps(
                 temp_list.append("Tv")
                 # C2type
                 temp_list.append("NA")
+                # determine position of snp in codon
+                if (i+int(window))%3==0:
+                    temp_list.append("3rd")
+                elif (i+int(window))%3==1:
+                    temp_list.append("1st")
+                elif (i+int(window))%3==2:
+                    temp_list.append("2nd")
                 snp_arr.append(temp_list)  
 
         ## clade 1 Ts
@@ -469,6 +574,13 @@ def find_snps(
                 temp_list.append("Tv")
                 # C2type
                 temp_list.append("Tv")
+                # determine position of snp in codon
+                if (i+int(window))%3==0:
+                    temp_list.append("3rd")
+                elif (i+int(window))%3==1:
+                    temp_list.append("1st")
+                elif (i+int(window))%3==2:
+                    temp_list.append("2nd")
                 snp_arr.append(temp_list)
             # Ts in outgroup seg
             elif any(x in cladeOutseg for x in set(T)) and not any(x in cladeOutseg for x in set(butT)):
@@ -493,6 +605,13 @@ def find_snps(
                 temp_list.append("Tv")
                 # C2type
                 temp_list.append("Tv")
+                # determine position of snp in codon
+                if (i+int(window))%3==0:
+                    temp_list.append("3rd")
+                elif (i+int(window))%3==1:
+                    temp_list.append("1st")
+                elif (i+int(window))%3==2:
+                    temp_list.append("2nd")
                 snp_arr.append(temp_list)
             elif any(x in cladeOutseg for x in set(C)) and not any(x in cladeOutseg for x in set(butC)):
                 # append pertinent information to indel_arr
@@ -513,6 +632,13 @@ def find_snps(
                 temp_list.append("Ts")
                 # C2type
                 temp_list.append("Ts")
+                # determine position of snp in codon
+                if (i+int(window))%3==0:
+                    temp_list.append("3rd")
+                elif (i+int(window))%3==1:
+                    temp_list.append("1st")
+                elif (i+int(window))%3==2:
+                    temp_list.append("2nd")
                 snp_arr.append(temp_list)
 
         # test if clade1seg only contains Ts and clade2seg only contains As
@@ -541,6 +667,13 @@ def find_snps(
                 temp_list.append("Tv")
                 # C2type
                 temp_list.append("NA")
+                # determine position of snp in codon
+                if (i+int(window))%3==0:
+                    temp_list.append("3rd")
+                elif (i+int(window))%3==1:
+                    temp_list.append("1st")
+                elif (i+int(window))%3==2:
+                    temp_list.append("2nd")
                 snp_arr.append(temp_list)
             # Ts in outgroup seg
             elif any(x in cladeOutseg for x in set(T)) and not any(x in cladeOutseg for x in set(butT)):
@@ -562,6 +695,13 @@ def find_snps(
                 temp_list.append("NA")
                 # C2type
                 temp_list.append("Tv")
+                # determine position of snp in codon
+                if (i+int(window))%3==0:
+                    temp_list.append("3rd")
+                elif (i+int(window))%3==1:
+                    temp_list.append("1st")
+                elif (i+int(window))%3==2:
+                    temp_list.append("2nd")
                 snp_arr.append(temp_list)
             # Gs in outgroup seg
             elif any(x in cladeOutseg for x in set(G)) and not any(x in cladeOutseg for x in set(butG)):
@@ -583,6 +723,13 @@ def find_snps(
                 temp_list.append("Tv")
                 # C2type
                 temp_list.append("Ts")
+                # determine position of snp in codon
+                if (i+int(window))%3==0:
+                    temp_list.append("3rd")
+                elif (i+int(window))%3==1:
+                    temp_list.append("1st")
+                elif (i+int(window))%3==2:
+                    temp_list.append("2nd")
                 snp_arr.append(temp_list)
             elif any(x in cladeOutseg for x in set(C)) and not any(x in cladeOutseg for x in set(butC)):
                 # append pertinent information to indel_arr
@@ -603,6 +750,13 @@ def find_snps(
                 temp_list.append("Ts")
                 # C2type
                 temp_list.append("Tv")
+                # determine position of snp in codon
+                if (i+int(window))%3==0:
+                    temp_list.append("3rd")
+                elif (i+int(window))%3==1:
+                    temp_list.append("1st")
+                elif (i+int(window))%3==2:
+                    temp_list.append("2nd")
                 snp_arr.append(temp_list)
 
         # test if clade1seg only contains Ts and clade2seg only contains Gs
@@ -631,6 +785,13 @@ def find_snps(
                 temp_list.append("Tv")
                 # C2type
                 temp_list.append("Ts")
+                # determine position of snp in codon
+                if (i+int(window))%3==0:
+                    temp_list.append("3rd")
+                elif (i+int(window))%3==1:
+                    temp_list.append("1st")
+                elif (i+int(window))%3==2:
+                    temp_list.append("2nd")
                 snp_arr.append(temp_list)
             # Ts in outgroup seg
             elif any(x in cladeOutseg for x in set(T)) and not any(x in cladeOutseg for x in set(butT)):
@@ -652,6 +813,13 @@ def find_snps(
                 temp_list.append("NA")
                 # C2type
                 temp_list.append("Tv")
+                # determine position of snp in codon
+                if (i+int(window))%3==0:
+                    temp_list.append("3rd")
+                elif (i+int(window))%3==1:
+                    temp_list.append("1st")
+                elif (i+int(window))%3==2:
+                    temp_list.append("2nd")
                 snp_arr.append(temp_list)
             # Gs in outgroup seg
             elif any(x in cladeOutseg for x in set(G)) and not any(x in cladeOutseg for x in set(butG)):
@@ -673,6 +841,13 @@ def find_snps(
                 temp_list.append("Tv")
                 # C2type
                 temp_list.append("NA")
+                # determine position of snp in codon
+                if (i+int(window))%3==0:
+                    temp_list.append("3rd")
+                elif (i+int(window))%3==1:
+                    temp_list.append("1st")
+                elif (i+int(window))%3==2:
+                    temp_list.append("2nd")
                 snp_arr.append(temp_list)
             elif any(x in cladeOutseg for x in set(C)) and not any(x in cladeOutseg for x in set(butC)):
                 # append pertinent information to indel_arr
@@ -693,6 +868,13 @@ def find_snps(
                 temp_list.append("Ts")
                 # C2type
                 temp_list.append("Tv")
+                # determine position of snp in codon
+                if (i+int(window))%3==0:
+                    temp_list.append("3rd")
+                elif (i+int(window))%3==1:
+                    temp_list.append("1st")
+                elif (i+int(window))%3==2:
+                    temp_list.append("2nd")
                 snp_arr.append(temp_list) 
 
         # test if clade1seg only contains Ts and clade2seg only contains Cs
@@ -721,6 +903,13 @@ def find_snps(
                 temp_list.append("Tv")
                 # C2type
                 temp_list.append("Tv")
+                # determine position of snp in codon
+                if (i+int(window))%3==0:
+                    temp_list.append("3rd")
+                elif (i+int(window))%3==1:
+                    temp_list.append("1st")
+                elif (i+int(window))%3==2:
+                    temp_list.append("2nd")
                 snp_arr.append(temp_list)
             # Ts in outgroup seg
             elif any(x in cladeOutseg for x in set(T)) and not any(x in cladeOutseg for x in set(butT)):
@@ -742,6 +931,13 @@ def find_snps(
                 temp_list.append("NA")
                 # C2type
                 temp_list.append("Ts")
+                # determine position of snp in codon
+                if (i+int(window))%3==0:
+                    temp_list.append("3rd")
+                elif (i+int(window))%3==1:
+                    temp_list.append("1st")
+                elif (i+int(window))%3==2:
+                    temp_list.append("2nd")
                 snp_arr.append(temp_list)
             # Gs in outgroup seg
             elif any(x in cladeOutseg for x in set(G)) and not any(x in cladeOutseg for x in set(butG)):
@@ -763,6 +959,13 @@ def find_snps(
                 temp_list.append("Tv")
                 # C2type
                 temp_list.append("Tv")
+                # determine position of snp in codon
+                if (i+int(window))%3==0:
+                    temp_list.append("3rd")
+                elif (i+int(window))%3==1:
+                    temp_list.append("1st")
+                elif (i+int(window))%3==2:
+                    temp_list.append("2nd")
                 snp_arr.append(temp_list)
             elif any(x in cladeOutseg for x in set(C)) and not any(x in cladeOutseg for x in set(butC)):
                 # append pertinent information to indel_arr
@@ -783,6 +986,13 @@ def find_snps(
                 temp_list.append("Ts")
                 # C2type
                 temp_list.append("NA")
+                # determine position of snp in codon
+                if (i+int(window))%3==0:
+                    temp_list.append("3rd")
+                elif (i+int(window))%3==1:
+                    temp_list.append("1st")
+                elif (i+int(window))%3==2:
+                    temp_list.append("2nd")
                 snp_arr.append(temp_list)
 
         ## clade 1 Gs
@@ -812,6 +1022,13 @@ def find_snps(
                 temp_list.append("Ts")
                 # C2type
                 temp_list.append("Ts")
+                # determine position of snp in codon
+                if (i+int(window))%3==0:
+                    temp_list.append("3rd")
+                elif (i+int(window))%3==1:
+                    temp_list.append("1st")
+                elif (i+int(window))%3==2:
+                    temp_list.append("2nd")
                 snp_arr.append(temp_list)
             # Ts in outgroup seg
             elif any(x in cladeOutseg for x in set(T)) and not any(x in cladeOutseg for x in set(butT)):
@@ -833,6 +1050,13 @@ def find_snps(
                 temp_list.append("Tv")
                 # C2type
                 temp_list.append("Tv")
+                # determine position of snp in codon
+                if (i+int(window))%3==0:
+                    temp_list.append("3rd")
+                elif (i+int(window))%3==1:
+                    temp_list.append("1st")
+                elif (i+int(window))%3==2:
+                    temp_list.append("2nd")
                 snp_arr.append(temp_list)
             # Gs in outgroup seg
             elif any(x in cladeOutseg for x in set(G)) and not any(x in cladeOutseg for x in set(butG)):
@@ -856,6 +1080,13 @@ def find_snps(
                 temp_list.append("Tv")
                 # C2type
                 temp_list.append("Tv")
+                # determine position of snp in codon
+                if (i+int(window))%3==0:
+                    temp_list.append("3rd")
+                elif (i+int(window))%3==1:
+                    temp_list.append("1st")
+                elif (i+int(window))%3==2:
+                    temp_list.append("2nd")
                 snp_arr.append(temp_list)
 
         # test if clade1seg only contains Gs and clade2seg only contains As
@@ -884,6 +1115,13 @@ def find_snps(
                 temp_list.append("Ts")
                 # C2type
                 temp_list.append("NA")
+                # determine position of snp in codon
+                if (i+int(window))%3==0:
+                    temp_list.append("3rd")
+                elif (i+int(window))%3==1:
+                    temp_list.append("1st")
+                elif (i+int(window))%3==2:
+                    temp_list.append("2nd")
                 snp_arr.append(temp_list)
             # Ts in outgroup seg
             elif any(x in cladeOutseg for x in set(T)) and not any(x in cladeOutseg for x in set(butT)):
@@ -905,6 +1143,13 @@ def find_snps(
                 temp_list.append("Tv")
                 # C2type
                 temp_list.append("Tv")
+                # determine position of snp in codon
+                if (i+int(window))%3==0:
+                    temp_list.append("3rd")
+                elif (i+int(window))%3==1:
+                    temp_list.append("1st")
+                elif (i+int(window))%3==2:
+                    temp_list.append("2nd")
                 snp_arr.append(temp_list)
             # Gs in outgroup seg
             elif any(x in cladeOutseg for x in set(G)) and not any(x in cladeOutseg for x in set(butG)):
@@ -926,6 +1171,13 @@ def find_snps(
                 temp_list.append("NA")
                 # C2type
                 temp_list.append("Ts")
+                # determine position of snp in codon
+                if (i+int(window))%3==0:
+                    temp_list.append("3rd")
+                elif (i+int(window))%3==1:
+                    temp_list.append("1st")
+                elif (i+int(window))%3==2:
+                    temp_list.append("2nd")
                 snp_arr.append(temp_list)
             elif any(x in cladeOutseg for x in set(C)) and not any(x in cladeOutseg for x in set(butC)):
                 # append pertinent information to indel_arr
@@ -946,6 +1198,13 @@ def find_snps(
                 temp_list.append("Tv")
                 # C2type
                 temp_list.append("Tv")
+                # determine position of snp in codon
+                if (i+int(window))%3==0:
+                    temp_list.append("3rd")
+                elif (i+int(window))%3==1:
+                    temp_list.append("1st")
+                elif (i+int(window))%3==2:
+                    temp_list.append("2nd")
                 snp_arr.append(temp_list)
 
         # test if clade1seg only contains Gs and clade2seg only contains Ts
@@ -974,6 +1233,13 @@ def find_snps(
                 temp_list.append("Ts")
                 # C2type
                 temp_list.append("Tv")
+                # determine position of snp in codon
+                if (i+int(window))%3==0:
+                    temp_list.append("3rd")
+                elif (i+int(window))%3==1:
+                    temp_list.append("1st")
+                elif (i+int(window))%3==2:
+                    temp_list.append("2nd")
                 snp_arr.append(temp_list)
             # Ts in outgroup seg
             elif any(x in cladeOutseg for x in set(T)) and not any(x in cladeOutseg for x in set(butT)):
@@ -995,6 +1261,13 @@ def find_snps(
                 temp_list.append("Tv")
                 # C2type
                 temp_list.append("NA")
+                # determine position of snp in codon
+                if (i+int(window))%3==0:
+                    temp_list.append("3rd")
+                elif (i+int(window))%3==1:
+                    temp_list.append("1st")
+                elif (i+int(window))%3==2:
+                    temp_list.append("2nd")
                 snp_arr.append(temp_list)
             # Gs in outgroup seg
             elif any(x in cladeOutseg for x in set(G)) and not any(x in cladeOutseg for x in set(butG)):
@@ -1016,6 +1289,13 @@ def find_snps(
                 temp_list.append("NA")
                 # C2type
                 temp_list.append("Tv")
+                # determine position of snp in codon
+                if (i+int(window))%3==0:
+                    temp_list.append("3rd")
+                elif (i+int(window))%3==1:
+                    temp_list.append("1st")
+                elif (i+int(window))%3==2:
+                    temp_list.append("2nd")
                 snp_arr.append(temp_list)
             elif any(x in cladeOutseg for x in set(C)) and not any(x in cladeOutseg for x in set(butC)):
                 # append pertinent information to indel_arr
@@ -1036,6 +1316,13 @@ def find_snps(
                 temp_list.append("Tv")
                 # C2type
                 temp_list.append("Ts")
+                # determine position of snp in codon
+                if (i+int(window))%3==0:
+                    temp_list.append("3rd")
+                elif (i+int(window))%3==1:
+                    temp_list.append("1st")
+                elif (i+int(window))%3==2:
+                    temp_list.append("2nd")
                 snp_arr.append(temp_list) 
 
         # test if clade1seg only contains Gs and clade2seg only contains Cs
@@ -1064,6 +1351,13 @@ def find_snps(
                 temp_list.append("Ts")
                 # C2type
                 temp_list.append("Tv")
+                # determine position of snp in codon
+                if (i+int(window))%3==0:
+                    temp_list.append("3rd")
+                elif (i+int(window))%3==1:
+                    temp_list.append("1st")
+                elif (i+int(window))%3==2:
+                    temp_list.append("2nd")
                 snp_arr.append(temp_list)
             # Ts in outgroup seg
             elif any(x in cladeOutseg for x in set(T)) and not any(x in cladeOutseg for x in set(butT)):
@@ -1085,6 +1379,13 @@ def find_snps(
                 temp_list.append("Tv")
                 # C2type
                 temp_list.append("Ts")
+                # determine position of snp in codon
+                if (i+int(window))%3==0:
+                    temp_list.append("3rd")
+                elif (i+int(window))%3==1:
+                    temp_list.append("1st")
+                elif (i+int(window))%3==2:
+                    temp_list.append("2nd")
                 snp_arr.append(temp_list)
             # Gs in outgroup seg
             elif any(x in cladeOutseg for x in set(G)) and not any(x in cladeOutseg for x in set(butG)):
@@ -1106,6 +1407,13 @@ def find_snps(
                 temp_list.append("NA")
                 # C2type
                 temp_list.append("Tv")
+                # determine position of snp in codon
+                if (i+int(window))%3==0:
+                    temp_list.append("3rd")
+                elif (i+int(window))%3==1:
+                    temp_list.append("1st")
+                elif (i+int(window))%3==2:
+                    temp_list.append("2nd")
                 snp_arr.append(temp_list)
             elif any(x in cladeOutseg for x in set(C)) and not any(x in cladeOutseg for x in set(butC)):
                 # append pertinent information to indel_arr
@@ -1126,6 +1434,13 @@ def find_snps(
                 temp_list.append("Tv")
                 # C2type
                 temp_list.append("NA")
+                # determine position of snp in codon
+                if (i+int(window))%3==0:
+                    temp_list.append("3rd")
+                elif (i+int(window))%3==1:
+                    temp_list.append("1st")
+                elif (i+int(window))%3==2:
+                    temp_list.append("2nd")
                 snp_arr.append(temp_list)  
 
         ## clade 1 Cs
@@ -1155,6 +1470,13 @@ def find_snps(
                 temp_list.append("Tv")
                 # C2type
                 temp_list.append("Tv")
+                # determine position of snp in codon
+                if (i+int(window))%3==0:
+                    temp_list.append("3rd")
+                elif (i+int(window))%3==1:
+                    temp_list.append("1st")
+                elif (i+int(window))%3==2:
+                    temp_list.append("2nd")
                 snp_arr.append(temp_list)
             # Ts in outgroup seg
             elif any(x in cladeOutseg for x in set(T)) and not any(x in cladeOutseg for x in set(butT)):
@@ -1176,6 +1498,13 @@ def find_snps(
                 temp_list.append("Ts")
                 # C2type
                 temp_list.append("Ts")
+                # determine position of snp in codon
+                if (i+int(window))%3==0:
+                    temp_list.append("3rd")
+                elif (i+int(window))%3==1:
+                    temp_list.append("1st")
+                elif (i+int(window))%3==2:
+                    temp_list.append("2nd")
                 snp_arr.append(temp_list)
             # Gs in outgroup seg
             elif any(x in cladeOutseg for x in set(G)) and not any(x in cladeOutseg for x in set(butG)):
@@ -1197,6 +1526,13 @@ def find_snps(
                 temp_list.append("Tv")
                 # C2type
                 temp_list.append("Tv")
+                # determine position of snp in codon
+                if (i+int(window))%3==0:
+                    temp_list.append("3rd")
+                elif (i+int(window))%3==1:
+                    temp_list.append("1st")
+                elif (i+int(window))%3==2:
+                    temp_list.append("2nd")
                 snp_arr.append(temp_list)
             elif any(x in cladeOutseg for x in set(C)) and not any(x in cladeOutseg for x in set(butC)):
                 1
@@ -1227,6 +1563,13 @@ def find_snps(
                 temp_list.append("Tv")
                 # C2type
                 temp_list.append("NA")
+                # determine position of snp in codon
+                if (i+int(window))%3==0:
+                    temp_list.append("3rd")
+                elif (i+int(window))%3==1:
+                    temp_list.append("1st")
+                elif (i+int(window))%3==2:
+                    temp_list.append("2nd")
                 snp_arr.append(temp_list)
             # Ts in outgroup seg
             elif any(x in cladeOutseg for x in set(T)) and not any(x in cladeOutseg for x in set(butT)):
@@ -1248,6 +1591,13 @@ def find_snps(
                 temp_list.append("Ts")
                 # C2type
                 temp_list.append("Tv")
+                # determine position of snp in codon
+                if (i+int(window))%3==0:
+                    temp_list.append("3rd")
+                elif (i+int(window))%3==1:
+                    temp_list.append("1st")
+                elif (i+int(window))%3==2:
+                    temp_list.append("2nd")
                 snp_arr.append(temp_list)
             # Gs in outgroup seg
             elif any(x in cladeOutseg for x in set(G)) and not any(x in cladeOutseg for x in set(butG)):
@@ -1269,6 +1619,13 @@ def find_snps(
                 temp_list.append("Tv")
                 # C2type
                 temp_list.append("Ts")
+                # determine position of snp in codon
+                if (i+int(window))%3==0:
+                    temp_list.append("3rd")
+                elif (i+int(window))%3==1:
+                    temp_list.append("1st")
+                elif (i+int(window))%3==2:
+                    temp_list.append("2nd")
                 snp_arr.append(temp_list)
             elif any(x in cladeOutseg for x in set(C)) and not any(x in cladeOutseg for x in set(butC)):
                 # append pertinent information to indel_arr
@@ -1289,6 +1646,13 @@ def find_snps(
                 temp_list.append("NA")
                 # C2type
                 temp_list.append("Tv")
+                # determine position of snp in codon
+                if (i+int(window))%3==0:
+                    temp_list.append("3rd")
+                elif (i+int(window))%3==1:
+                    temp_list.append("1st")
+                elif (i+int(window))%3==2:
+                    temp_list.append("2nd")
                 snp_arr.append(temp_list)
 
         # test if clade1seg only contains Cs and clade2seg only contains Ts
@@ -1317,6 +1681,13 @@ def find_snps(
                 temp_list.append("Tv")
                 # C2type
                 temp_list.append("Tv")
+                # determine position of snp in codon
+                if (i+int(window))%3==0:
+                    temp_list.append("3rd")
+                elif (i+int(window))%3==1:
+                    temp_list.append("1st")
+                elif (i+int(window))%3==2:
+                    temp_list.append("2nd")
                 snp_arr.append(temp_list)
             # Ts in outgroup seg
             elif any(x in cladeOutseg for x in set(T)) and not any(x in cladeOutseg for x in set(butT)):
@@ -1338,6 +1709,13 @@ def find_snps(
                 temp_list.append("Ts")
                 # C2type
                 temp_list.append("NA")
+                # determine position of snp in codon
+                if (i+int(window))%3==0:
+                    temp_list.append("3rd")
+                elif (i+int(window))%3==1:
+                    temp_list.append("1st")
+                elif (i+int(window))%3==2:
+                    temp_list.append("2nd")
                 snp_arr.append(temp_list)
             # Gs in outgroup seg
             elif any(x in cladeOutseg for x in set(G)) and not any(x in cladeOutseg for x in set(butG)):
@@ -1359,6 +1737,13 @@ def find_snps(
                 temp_list.append("Tv")
                 # C2type
                 temp_list.append("Tv")
+                # determine position of snp in codon
+                if (i+int(window))%3==0:
+                    temp_list.append("3rd")
+                elif (i+int(window))%3==1:
+                    temp_list.append("1st")
+                elif (i+int(window))%3==2:
+                    temp_list.append("2nd")
                 snp_arr.append(temp_list)
             elif any(x in cladeOutseg for x in set(C)) and not any(x in cladeOutseg for x in set(butC)):
                 # append pertinent information to indel_arr
@@ -1379,6 +1764,13 @@ def find_snps(
                 temp_list.append("NA")
                 # C2type
                 temp_list.append("Ts")
+                # determine position of snp in codon
+                if (i+int(window))%3==0:
+                    temp_list.append("3rd")
+                elif (i+int(window))%3==1:
+                    temp_list.append("1st")
+                elif (i+int(window))%3==2:
+                    temp_list.append("2nd")
                 snp_arr.append(temp_list) 
 
         # test if clade1seg only contains Cs and clade2seg only contains Gs
@@ -1407,6 +1799,13 @@ def find_snps(
                 temp_list.append("Tv")
                 # C2type
                 temp_list.append("Ts")
+                # determine position of snp in codon
+                if (i+int(window))%3==0:
+                    temp_list.append("3rd")
+                elif (i+int(window))%3==1:
+                    temp_list.append("1st")
+                elif (i+int(window))%3==2:
+                    temp_list.append("2nd")
                 snp_arr.append(temp_list)
             # Ts in outgroup seg
             elif any(x in cladeOutseg for x in set(T)) and not any(x in cladeOutseg for x in set(butT)):
@@ -1428,6 +1827,13 @@ def find_snps(
                 temp_list.append("Ts")
                 # C2type
                 temp_list.append("Tv")
+                # determine position of snp in codon
+                if (i+int(window))%3==0:
+                    temp_list.append("3rd")
+                elif (i+int(window))%3==1:
+                    temp_list.append("1st")
+                elif (i+int(window))%3==2:
+                    temp_list.append("2nd")
                 snp_arr.append(temp_list)
             # Gs in outgroup seg
             elif any(x in cladeOutseg for x in set(G)) and not any(x in cladeOutseg for x in set(butG)):
@@ -1449,6 +1855,13 @@ def find_snps(
                 temp_list.append("Tv")
                 # C2type
                 temp_list.append("NA")
+                # determine position of snp in codon
+                if (i+int(window))%3==0:
+                    temp_list.append("3rd")
+                elif (i+int(window))%3==1:
+                    temp_list.append("1st")
+                elif (i+int(window))%3==2:
+                    temp_list.append("2nd")
                 snp_arr.append(temp_list)
             elif any(x in cladeOutseg for x in set(C)) and not any(x in cladeOutseg for x in set(butC)):
                 # append pertinent information to indel_arr
@@ -1469,6 +1882,13 @@ def find_snps(
                 temp_list.append("NA")
                 # C2type
                 temp_list.append("Tv")
+                # determine position of snp in codon
+                if (i+int(window))%3==0:
+                    temp_list.append("3rd")
+                elif (i+int(window))%3==1:
+                    temp_list.append("1st")
+                elif (i+int(window))%3==2:
+                    temp_list.append("2nd")
                 snp_arr.append(temp_list)
 
     #print(snp_arr)
@@ -1480,8 +1900,8 @@ def find_snps(
         sys.exit()
 
     # print np array line by line tab delimited
-    for c0, c1, c2, c3, c4, c5, c6, c7 in snp_arr:
-        print("{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}".format(c0, c1, c2, c3, c4, c5, c6, c7))
+    for c0, c1, c2, c3, c4, c5, c6, c7, c8 in snp_arr:
+        print("{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}\t{}".format(c0, c1, c2, c3, c4, c5, c6, c7, c8))
 
 def read_clades_into_list(
     window, clade1, 
@@ -1601,7 +2021,9 @@ def main(
             print("\t\trefers to clade2 and C1C2 refers to both clades.")
             print("\t  - C1type refers to if the SNP found at C1 is a Transition (Ts) or")
             print("\t\tor Transversion (Tv). If no SNP is found, the column will contain NA")
-            print("\t  - C2type contains the same information but for clade 2.\n")
+            print("\t  - C2type contains the same information but for clade 2.")
+            print("\t  - pos refers to the position of the SNP in a codon. That is, is the SNP in")
+            print("\t\tthe wobble position (3rd) or the 1st or 2nd position.\n")
             sys.exit()
         elif opt == '-o':
             if os.path.isfile(arg):
