@@ -136,11 +136,11 @@ def find_indels(
                     new_line = [line_ii[0], line_jj[1], line_jj[2], line_jj[3]]
                     line_ii  = new_line
                     line_jj  = indel_arr[idx_jj]
-                elif (line_ii[1] >= line_jj[0]) and (line_ii[3]==line_jj[3]) and (line_ii[2]!=line_jj[2]):
-                    idx_jj  += int(1)
-                    new_line = [line_ii[0], line_jj[1], "outCombo", line_jj[3]]
-                    line_ii  = new_line
-                    line_jj  = indel_arr[idx_jj]
+                #elif (line_ii[1] >= line_jj[0]) and (line_ii[3]==line_jj[3]) and (line_ii[2]!=line_jj[2]):
+                #    idx_jj  += int(1)
+                #    new_line = [line_ii[0], line_jj[1], "outCombo", line_jj[3]]
+                #    line_ii  = new_line
+                #    line_jj  = indel_arr[idx_jj]
                 else:
                     line_ii_opt = False
                     merged_data.append(new_line)

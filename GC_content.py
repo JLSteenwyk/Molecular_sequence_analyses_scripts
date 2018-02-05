@@ -33,13 +33,8 @@ def calc_GCs(fastadata):
     AT = A_occurence + T_occurence
     total = GC + AT
     print(GC/total)    
-
-def remove_star(fastadata):
-    """ removes stop codons from fasta data list """
-    fastadata = [x for x in fastadata if '*' not in x]
-    calc_GCs(fastadata)
     
-def AAs_list(ProteinFasta):
+def NTs_list(ProteinFasta):
     """ Reads protein fasta file and creates list """
     fastadata = []
     with open(ProteinFasta, 'r') as file:
@@ -49,10 +44,10 @@ def AAs_list(ProteinFasta):
             if not '>' in line:
                 for char in line:
                     fastadata.append(char)
-    remove_star(fastadata)
+    calc_GCs(fastadata)
     
 """ Reads arguments and passes them to compare method """
-ProteinFasta = '' # used for reading open sys.argv[1] file
+INFasta = '' # used for reading open sys.argv[1] file
 
 try:	
 	if sys.argv[1] == '-h':
@@ -63,8 +58,8 @@ try:
 		sys.exit()
 	else:
 		if os.path.isfile(sys.argv[1]):
-			ProteinFasta = sys.argv[1] #save argv 1
-			AAs_list(ProteinFasta)
+			INFasta = sys.argv[1] #save argv 1
+			NTs_list(INFasta)
 		else:
 			print("\nThe specified file does not exist\nPlease check file pathway or file name\n\nFor help or usage message please append argument -h, --help or --usage\n\nThank you!\n")
 except IndexError:
