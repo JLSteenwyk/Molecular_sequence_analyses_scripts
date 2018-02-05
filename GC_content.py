@@ -37,7 +37,7 @@ def calc_GCs(fastadata):
 def NTs_list(ProteinFasta):
     """ Reads protein fasta file and creates list """
     fastadata = []
-    with open(ProteinFasta, 'r') as file:
+    with open(INFasta, 'r') as file:
         file.readline()
         for line in file:
             line = line.rstrip('\n')
