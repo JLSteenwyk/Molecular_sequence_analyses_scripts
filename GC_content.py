@@ -34,7 +34,7 @@ def calc_GCs(fastadata):
     total = GC + AT
     print(GC/total)    
     
-def NTs_list(ProteinFasta):
+def NTs_list(INFasta):
     """ Reads protein fasta file and creates list """
     fastadata = []
     with open(INFasta, 'r') as file:
