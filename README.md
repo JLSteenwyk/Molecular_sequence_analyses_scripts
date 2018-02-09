@@ -23,7 +23,7 @@ python3
 |- numpy
 ```
 Basic usage: python Find_indel_unqiue_to_clade.py -w window -o clade1.file -t clade2.file -i alignment.fasta -s step <br />
-Original author: [Jacob Steenwyk](https://jsteenwyk.github.io/)
+Original author: [Jacob Steenwyk](https://jlsteenwyk.github.io/)
 
 ### Find_indel_unqiue_to_clade_context_wOutgroup.py
 Identifies indels unique to specific clades within an alignment fasta file.
@@ -45,7 +45,7 @@ python3
 |- numpy
 ```
 Basic usage: python Find_indel_unqiue_to_clade.py -w window -o clade1.file -t clade2.file -i alignment.fasta -s step -g outgroup_clade.file <br />
-Original author: [Jacob Steenwyk](https://jsteenwyk.github.io/)
+Original author: [Jacob Steenwyk](https://jlsteenwyk.github.io/)
 
 ### Calculate_distance_between_two_taxa.py
 Calculates phylogenetic distance between two taxa in a newick tree file.
@@ -63,7 +63,7 @@ python3
          |- TreeMixin
 ```
 Basic usage: python Calculate_distance_between_two_taxa.py -i newick_tree_file -o taxa1 -t taxa2 <br />
-Original author: [Jacob Steenwyk](https://jsteenwyk.github.io/)
+Original author: [Jacob Steenwyk](https://jlsteenwyk.github.io/)
 
 ### Calculate_pairwise_distances_among_taxa.py
 Calculates all pairwise phylogenetic distances between two taxa in a newick tree file.
@@ -82,7 +82,7 @@ python3
 |- itertools
 ```
 Basic usage: python Calculate_pairwise_distances_among_taxa.py -i newick_tree_file -l target_taxa_list <br />
-Original author: [Jacob Steenwyk](https://jsteenwyk.github.io/)
+Original author: [Jacob Steenwyk](https://jlsteenwyk.github.io/)
 
 ### calculate_average_protein_sequence_identity.bash
 Calculates the average protein sequence identity between two whole genome
@@ -96,7 +96,7 @@ ncbi-blast-2.3.0+
 |- blastp
 ```
 Basic usage: bash calculate_average_protein_sequence_identity.bash A.pep.fasta B.pep.fasta <br />
-Original author: [Jacob Steenwyk](https://jsteenwyk.github.io/)
+Original author: [Jacob Steenwyk](https://jlsteenwyk.github.io/)
 
 ### calculate_clade1_clade2_branch_len.bash
 Calculate the internode branch length of the branch that leads up to clade 1 and clade 2.
@@ -111,7 +111,7 @@ newick utilities v1.6
 awk v3.1.7
 ```
 Basic usage: bash calculate_clade1_clade2_branch_len.bash file_of_newick_trees <br />
-Original author: [Jacob Steenwyk](https://jsteenwyk.github.io/)
+Original author: [Jacob Steenwyk](https://jlsteenwyk.github.io/)
 
 ### reorder_fasta.py
 Reorder a multi-fasta file according to the order of header names in a third party file.
@@ -142,7 +142,7 @@ First argument should be the ID and the second argument should be the multi-fast
 awk v3.1.7
 ```
 Basic usage: bash Split_Fasta_by_Header.sh Spp_ID fasta_file_name <br />
-Original author: [Jacob Steenwyk](https://jsteenwyk.github.io/)
+Original author: [Jacob Steenwyk](https://jlsteenwyk.github.io/)
 
 ### busco2alignment.py
 Takes the full table output of busco runs and creates a concatenated fasta file for phylogenetic inference using the concatenation method. Only argument is a configuration file specified with -c.
@@ -191,7 +191,7 @@ python3
 |- configparser
 ```
 Basic usage: python busco2alignment.py -c config.busco2alignment<br />
-Original author: [Jacob Steenwyk](https://jsteenwyk.github.io/)
+Original author: [Jacob Steenwyk](https://jlsteenwyk.github.io/)
 
 This script is also broken up into two parts busco2uscofa.py and trimal2concat.py. <br />
 Input and usage are the same but alignment and trimming must be done without these scripts. For trimal2concat.py, trimal files are assumed to have the following naming scheme buscoID.fa.mafft.trimal.
@@ -207,7 +207,7 @@ python3
 |- re
 ```
 Basic usage: python busco_occupancy.py -b busco_output_dirs -o output_file<br />
-Original author: [Jacob Steenwyk](https://jsteenwyk.github.io/)
+Original author: [Jacob Steenwyk](https://jlsteenwyk.github.io/)
 
 ### GC_content.py and AT_content.py
 Takes a nucleotide fasta file as the first and only argument and determines the GC (or AT) content of the entirety of the file. This is used to determine genome GC (or AT) content.
@@ -220,7 +220,7 @@ python3
 |- re
 ```
 Basic usage: python GC_content.py nucleotide.fasta or python AT_content.py nucleotide.fasta<br />
-Original author: [Jacob Steenwyk](https://jsteenwyk.github.io/)
+Original author: [Jacob Steenwyk](https://jlsteenwyk.github.io/)
 
 ### consensus_sequence_generator.py
 Takes a multiple sequence alignment fasta file and a specified threshold value to create a consensus sequence among sequences. The threshold value should be between 0 and 1 representing 0-100% threshold for minimum AA present in a column to be considered the consensus.
@@ -236,11 +236,25 @@ python3
       |- AlignInfo
 ```
 Basic usage: python consensus_sequence_generator.py -i protein.MSA.fasta -t threshold<br />
-Original author: [Jacob Steenwyk](https://jsteenwyk.github.io/)
+Original author: [Jacob Steenwyk](https://jlsteenwyk.github.io/)
+
+### threadNuclProt.py
+Takes a protein sequence alignment and the corresponding nucleotide fasta file and threads the corresponding codons on top of the protein alignment. The order of genes in the nucleotide and protein fasta file must be the same. To facilitate use of this script for downstream programs, a boolean for whether the stop codon should be maintained or replaced with gaps is specified with the '-s' parameter representing a true or false for if the stop codon should be kept. Additionally, ambiguous amino acids 'X' are replaced with gaps. 
+```
+python3
+|- sys
+|- getopt
+|- os.path
+|- os
+|- Bio
+   |- SeqIO
+```
+Basic usage: python threadNuclProt.py -p protein.MSA.fasta -n nucleotide.fasta -s T/F<br />
+Original author: [Jacob Steenwyk](https://jlsteenwyk.github.io/)
 
 ## Authors
 
-* **Jacob Steenwyk** - [Github page](https://jsteenwyk.github.io/)
+* **Jacob Steenwyk** - [Github page](https://jlsteenwyk.github.io/)
 * The online community of bioinformaticians. Other/original authors are listed per script.
 
 ## Acknowledgments
