@@ -252,6 +252,22 @@ python3
 Basic usage: python threadNuclProt.py -p protein.MSA.fasta -n nucleotide.fasta -s T/F<br />
 Original author: [Jacob Steenwyk](https://jlsteenwyk.github.io/)
 
+### genomic_BUSCOs2uscofa.py
+Creates BUSCO fasta files across given taxa using BUSCO outputs created using the '-m genome' parameter - that is, BUSCOs/genome completeness was determined from the genome fasta file and NOT the proteome or cds file. Requires a single column file with the names of the busco output directories and a list of the taxa names. It is required that the order of the busco output directories and the taxa names are in the same order. Taxon occupancy cut-offs for each BUSCO can be specified using a decimal value between 0 and 1. This script can create BUSCO fasta files for either nucleotide or protein fasta files.
+```
+python3
+|- sys
+|- getopt
+|- os.path
+|- os
+|- Bio
+   |- SeqIO
+|- datetime
+   |- datetime
+```
+Basic usage: python genomic_BUSCOs2uscofa.py -b busco_dirs.list -o 0-1 -t taxon_names.list -c nucl/prot<br />
+Original author: [Jacob Steenwyk](https://jlsteenwyk.github.io/)
+
 ## Authors
 
 * **Jacob Steenwyk** - [Github page](https://jlsteenwyk.github.io/)
