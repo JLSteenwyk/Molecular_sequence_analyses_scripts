@@ -47,13 +47,13 @@ def thread_dna(
         Nseq = ''
         Nseq = NUCLf[entry].seq
 
-        # check that Nseq is divisible by three and therefore not a pseudogene
-        if len(Nseq) % 3 != 0:
-            print("")
-            print(ID, "nucleotide sequence has a length of", len(Nseq))
-            print("and cannot be threaded over the protein alignment.")
-            print("Exiting now...\n")
-            sys.exit()
+        # # check that Nseq is divisible by three and therefore not a pseudogene
+        # if len(Nseq) % 3 != 0:
+        #     print("")
+        #     print(ID, "nucleotide sequence has a length of", len(Nseq))
+        #     print("and cannot be threaded over the protein alignment.")
+        #     print("Exiting now...\n")
+        #     sys.exit()
 
         pal2nal[ID] = ''
         GAPcnt = 0
