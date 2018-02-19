@@ -47,6 +47,11 @@ def create_concat(
     print("\n"+"-"*(len("- Output files -")))
     print("| Output files |")
     print("-"*(len("- Output files -")))
+    print("Total number of taxa:", len(taxa_list))
+    print("Total number of alignments:", len(alignments))
+    print("partition file output:", file_partition)
+    print("concatenated fasta output:", fastaOUT)
+    print("occupancy report:", file_occupancy)
 
     # assigning placeholders for lengths
     firstLen    = 1
@@ -169,7 +174,7 @@ def main(
     prefix          = ''
 
     try:
-        opts, args = getopt.getopt(argv, "ha:t:p:c:")
+        opts, args = getopt.getopt(argv, "ha:t:p:c:m:")
     except getopt.GetoptError:
         # error message
         print("Error\nFor help use -h argument\n")
@@ -211,7 +216,7 @@ def main(
             print("\n-p <prefix of output files>")
             print("\tPrefix of the output files. For example, if the output prefix is")
             print("\tspecified to be 'concat' a file named 'concat.fa' (the concatenated")
-            print("\tmatrix) and 'concat.partition' (the associated partition file) will be made.\n")
+            print("\tmatrix) and 'concat.partition' (the associated partition file) will be made.")
             sys.exit()
 
         elif opt == '-a':
