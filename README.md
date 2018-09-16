@@ -134,6 +134,30 @@ python3
 Basic usage: python remove_fasta_entries_wOnly_gaps.py -i fasta.file<br />
 Original author: [Jacob Steenwyk](https://jlsteenwyk.github.io/)
 
+### find_positions_with_same_character_in_fasta.py
+This script identifies positions in a fasta alignment file (-i parameter)
+where for the taxa of interest (-t parameter), the script will determine the
+positions that have the same character. For example, if position 1 in all taxa
+have an 'A', then the script will report that position 1 has the same nucleotide
+in all taxa..
+```import sys
+import getopt
+import os.path
+import re
+from Bio import SeqIO
+import numpy as np
+python3
+|- sys
+|- getopt
+|- os.path
+|- re
+|- Bio
+   |- SeqIO
+|- numpy
+```
+Basic usage: python remove_fasta_entries_wOnly_gaps.py -t taxa.list -i aligned_fasta.file<br />
+Original author: [Jacob Steenwyk](https://jlsteenwyk.github.io/)
+
 ## Authors
 
 * **Jacob Steenwyk** - [Github page](https://jlsteenwyk.github.io/)
