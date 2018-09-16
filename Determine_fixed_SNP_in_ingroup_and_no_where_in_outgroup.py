@@ -105,7 +105,7 @@ def read_clades_into_list(
     step, cladeOutgroup
     ):
     """
-    Scans for small indels 
+    reads clades 
     
     Parameters
     ----------
@@ -135,7 +135,7 @@ def read_clades_into_list(
     lenClade = len(cladeL)
     lenCladeOut = len(cladeOutL)
 
-    # pass to find_indels function
+    # pass to find_snps function
     find_snps(
         window, cladeL, 
         alignedFasta, 
@@ -173,6 +173,12 @@ def main(
     # test for arguments
     for opt, arg in opts:
         if opt == '-h':
+            #script explanation
+            print("\nThis script will identifies snps in one clade (-o parameter), which")
+            print("can be one or more taxa. The script will ensure that the SNP is identified")
+            print("by comparing the nucleotide or amino acid to an outgroup set of one or")
+            print("more taxa (-g parameter). The output will detail the position of the SNP")
+            print("and nucleotide or amino acid status in the ingroup and outgroup.")
             # clade 1 file explanation
             print("\n-o\tclade 1 of interest:")
             print("\ta single column file with the fasta header names from clade 1")
@@ -194,14 +200,11 @@ def main(
             print("\tthe taxa will not be considered in the analysis.")
             # output explanation
             print("\noutput explanation:")
-            print("\tThe output will have 6 columns titled:")
-            print("\tstart, stop, C1, OG, class, C1type, C2type")
-            print("\t  - start refers to the starting position of the SNP and stop is the end")
+            print("\tThe output will have 3 columns titled:")
+            print("\tpos, C1, OG")
+            print("\t  - pos refers to the position of the SNP")
             print("\t  - C1 refers to the nucleotide found in clade 1 specified using -o")
             print("\t  - OG refers to the nucleotide found in outgroup clade specified using -g")
-            print("\t  - class will be populated with either a C1, C2, or C1C2. This refers to")
-            print("\t\twhich clade has the SNP. C1 refers to clade1, C2")
-            print("\t\trefers to clade2 and C1C2 refers to both clades.")
             sys.exit()
         elif opt == '-o':
             if os.path.isfile(arg):

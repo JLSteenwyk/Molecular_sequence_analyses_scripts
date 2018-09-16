@@ -158,6 +158,25 @@ python3
 Basic usage: python remove_fasta_entries_wOnly_gaps.py -t taxa.list -i aligned_fasta.file<br />
 Original author: [Jacob Steenwyk](https://jlsteenwyk.github.io/)
 
+### Determine_fixed_SNP_in_ingroup_and_no_where_in_outgroup.py
+This script will identifies snps in one clade (-o parameter), which
+can be one or more taxa. The script will ensure that the SNP is identified
+by comparing the nucleotide or amino acid to an outgroup set of one or
+more taxa (-g parameter). The output will detail the position of the SNP
+and nucleotide or amino acid status in the ingroup and outgroup.
+```
+python3
+|- sys
+|- getopt
+|- os.path
+|- re
+|- Bio
+   |- SeqIO
+|- numpy
+```
+Basic usage: python Determine_fixed_SNP_in_ingroup_and_no_where_in_outgroup.py -o ingroup_taxa.list -g outgroup_taxa.list -i aligned_fasta.file<br />
+Original author: [Jacob Steenwyk](https://jlsteenwyk.github.io/)
+
 ## Authors
 
 * **Jacob Steenwyk** - [Github page](https://jlsteenwyk.github.io/)
