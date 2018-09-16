@@ -121,6 +121,19 @@ python3
 Basic usage: python consensus_sequence_generator.py -i protein.MSA.fasta -t threshold<br />
 Original author: [Jacob Steenwyk](https://jlsteenwyk.github.io/)
 
+### remove_fasta_entries_wOnly_gaps.py
+Takes a multi-fasta file and remove entries that contain only gaps ('-').
+```
+python3
+|- sys
+|- getopt
+|- os.path
+|- Bio
+   |- SeqIO
+```
+Basic usage: python remove_fasta_entries_wOnly_gaps.py -i fasta.file<br />
+Original author: [Jacob Steenwyk](https://jlsteenwyk.github.io/)
+
 ## Authors
 
 * **Jacob Steenwyk** - [Github page](https://jlsteenwyk.github.io/)
