@@ -195,6 +195,75 @@ python3
 Basic usage: python homopolymer_mutation_identifier.py.py -t taxon -g outgroup_taxa.list -i aligned_fasta.file<br />
 Original author: [Jacob Steenwyk](https://jlsteenwyk.github.io/)
 
+### CpG_to_TpG_identifier.py
+This script will parse through a fasta file (-i parameter) and identify CpG -> TpG mutations suggestive of 5-mC mutations. To do so, it will first identify CpGs among outgroup taxa (-g parameter) and then compare the outgroup sequence to a taxon of interest (-t parameter). Output is in the following order: start, end, mut, CpGmut, tax, og
+```
+python3
+|- sys
+|- getopt
+|- os.path
+|- Bio
+   |- SeqIO
+|- numpy
+```
+Basic usage: python CpG_to_TpG_identifier.py.py -i fasta.file -g outgroup_taxa.list -t taxon_of_interest <br />
+Original author: [Jacob Steenwyk](https://jlsteenwyk.github.io/)
+
+### Epsteins_coefficient_of_difference.py
+Scans the outgroup (-g parameter) for conserved amino acids and then determines if there is an amino acid substitution in the taxon of interest (-t parameter). If there is a substitution, the Epsteins's coefficient of difference is determined. Values for Epstein's coefficient of difference values can be found here: https://en.wikipedia.org/wiki/Amino_acid_replacement#Epstein's_coefficient_of_difference Output is 5 columns that specify the position of the substition (cols 1 and 2), the taxon of interests sequence (col 3), the outgroup's sequence (col 4), and the Epsteins's index at that position (col 5).
+```
+python3
+|- sys
+|- getopt
+|- os.path
+|- Bio
+   |- SeqIO
+   |- BiopythonWarning
+|- Bio.Seq
+   |- Seq
+|- warnings
+|- numpy
+|- pprint
+   |- pprint
+```
+Basic usage: python Epsteins_coefficient_of_difference.py -i fasta.file -g outgroup_taxa.list -t taxon_of_interest<br />
+Original author: [Jacob Steenwyk](https://jlsteenwyk.github.io/)
+
+### Sneaths_index.py
+Scans the outgroup (-g parameter) for conserved amino acids and then determines if there is an amino acid substitution in the taxon of interest (-t parameter). If there is a substitution, the Sneath's index value of dissimilarity is determined. Values for Sneath's index values can be found here: https://en.wikipedia.org/wiki/Amino_acid_replacement#Sneath's_index Output is 5 columns that specify the position of the substition (cols 1 and 2), the taxon of interests sequence (col 3), the outgroup's sequence (col 4), and the Sneath's index at that position (col 5).
+```
+python3
+|- sys
+|- getopt
+|- os.path
+|- Bio
+   |- SeqIO
+   |- BiopythonWarning
+|- Bio.Seq
+   |- Seq
+|- warnings
+|- numpy
+|- pprint
+   |- pprint
+```
+Basic usage: python Sneaths_index.py -i fasta.file -g outgroup_taxa.list -t taxon_of_interest<br />
+Original author: [Jacob Steenwyk](https://jlsteenwyk.github.io/)
+
+### determine_clusters_of_genes.py
+Takes as input an NCBI features table and a bed file of the genes of interest. The script will then determine if the genes of interest are in a cluster or not. Additionally, this script will find genes inbetween clustered genes. Output is a print out of gene clustering (or lack thereof). More specifically, <br />col1: scaffolds genes are on, <br />col2: cluster start, <br />col3: cluster stop, <br />col4: number of unique homolog identifiers, <br />col5: number of total genes in the cluster, <br />col6: clustered gene identifiers in order of genomic appearance, <br />col7: homolog identifiers that correspond to the genes in col6. The -b parameter file should contain: col1: scaffold, col2: gene start, col3: gene stop col4: variable column, and col5: the homolog identier. For example, for the MAL locus, the homolog identifier could be MALx3 for MALx3 homologs.
+```
+python3
+|- sys
+|- getopt
+|- os.path
+|- re
+|- collections
+   |- OrderedDict
+|- numpy
+```
+Basic usage: python Sneaths_index.py -f feature.file -g gene_distance_boundary -b bed.file<br />
+Original author: [Jacob Steenwyk](https://jlsteenwyk.github.io/)
+
 ## Authors
 
 * **Jacob Steenwyk** - [Github page](https://jlsteenwyk.github.io/)
