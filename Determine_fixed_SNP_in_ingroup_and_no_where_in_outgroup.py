@@ -74,7 +74,7 @@ def find_snps(
 
         # If cladeSeg only contains 1 unique character
         if len(set(cladeSeg)) == 1:
-        	# if the unique character is not found in cladeOutseg then print position
+            # if the unique character is not found in cladeOutseg then print position
             if cladeSeg[0] not in set(cladeOutseg):
                 # append pertinent information to snp_arr
                 temp_list = []

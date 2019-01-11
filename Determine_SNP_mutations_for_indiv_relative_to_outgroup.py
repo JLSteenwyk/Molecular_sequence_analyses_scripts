@@ -72,6 +72,8 @@ def find_snps(
     butC = set('AaTtGgNn-')
     butG = set('AaTtCcNn-')
 
+    ambig = set('RrYyKkMmSsWwBbDdHhVvNn')
+
     # intialize list for np array of continuous identified snps
     snp_arr = [['start','stop','C1','OG','C1type','pos']]
 
@@ -88,7 +90,9 @@ def find_snps(
             cladeOutseg += (v[i:i+int(window)])
        
         ## outgroup As
-        if set(str(cladeOutseg)) <= A:
+        if (set(str(cladeOutseg)) <= ambig) or (set(str(clade1seg)) <= ambig):
+            continue
+        elif set(str(cladeOutseg)) <= A:
             # clade1 Ts
             if set(str(clade1seg)) <= T:
                 # append pertinent information to snp_arr

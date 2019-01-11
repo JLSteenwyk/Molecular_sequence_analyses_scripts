@@ -60,7 +60,7 @@ def find_indels(
     length    = len(alignment[0].seq)
 
     # DNA acid single letters and gap set
-    nts       = set('ATCGNatcgn')
+    nts       = set('ATCGNRYKMSWBDHVatcgnrykmswbdhv')
     gap       = set('-')
 
     # intialize list for np array of continuous identified indels
@@ -79,7 +79,7 @@ def find_indels(
             cladeOutseg += (v[i:i+int(window)])
        
         # test if clade1seg only contains nts and cladeOutseg only contains gaps
-        if (set(str(clade1seg)) <= nts) and (set(str(cladeOutseg)) <= gap):
+        if (set(str(clade1seg)) <= nts) and (set(str(cladeOutseg)) == gap):
             ## print window that contains indel and concatenated string from both clades
             #print(i, i+int(window), "gap2", str(clade1seg), str(cladeOutseg))
 
@@ -92,7 +92,7 @@ def find_indels(
             indel_arr.append(temp_list)
 
         # test if clade1seg only contains gaps and clade2seg only contains aas
-        elif (set(str(clade1seg)) <= gap) and (set(str(cladeOutseg)) <= nts):
+        elif (set(str(clade1seg)) == gap) and (set(str(cladeOutseg)) <= nts):
             ## print window that contains indel and concatenated string from both clades
             #print(i, i+int(window), "gap1", str(clade1seg), str(clade2seg), str(cladeOutseg))
 

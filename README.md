@@ -177,6 +177,24 @@ python3
 Basic usage: python Determine_fixed_SNP_in_ingroup_and_no_where_in_outgroup.py -o ingroup_taxa.list -g outgroup_taxa.list -i aligned_fasta.file<br />
 Original author: [Jacob Steenwyk](https://jlsteenwyk.github.io/)
 
+### homopolymer_mutation_identifier.py
+This script will identify homopolymer runs in the outgroup taxa sequence (-g parameter).
+The script will then report substitutions if there are any in a taxon of interest (-t parameter).
+Additionally the script will report any insertions or deletions in homopolymer sequences.
+Warning: this script is written for CODON BASED ALIGNMENTS ONLY!
+```
+python3
+|- sys
+|- getopt
+|- os.path
+|- re
+|- Bio
+   |- SeqIO
+|- numpy
+```
+Basic usage: python homopolymer_mutation_identifier.py.py -t taxon -g outgroup_taxa.list -i aligned_fasta.file<br />
+Original author: [Jacob Steenwyk](https://jlsteenwyk.github.io/)
+
 ## Authors
 
 * **Jacob Steenwyk** - [Github page](https://jlsteenwyk.github.io/)

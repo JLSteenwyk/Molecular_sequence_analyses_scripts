@@ -81,6 +81,8 @@ def find_snps(
     butC = set('AaTtGgNn-')
     butG = set('AaTtCcNn-')
 
+    ambig = set('RrYyKkMmSsWwBbDdHhVvNn')
+
     # intialize list for np array of continuous identified indels
     snp_arr = [['start','stop','C1','C2','OG','class','C1type','C2type','pos']]
 
