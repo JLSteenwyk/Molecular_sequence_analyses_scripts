@@ -283,8 +283,75 @@ python3
    |- OrderedDict
 |- numpy
 ```
-Basic usage: python Sneaths_index.py -f feature.file -g gene_distance_boundary -b bed.file<br />
+Basic usage: python determine_clusters_of_genes.py -f feature.file -g gene_distance_boundary -b bed.file<br />
 Original author: [Jacob Steenwyk](https://jlsteenwyk.github.io/)
+
+### fasta2paml.py
+Converts a fasta file to a paml file. This was written explicitly for conducting dN/dS analysis but paml files can be used as input into various softwares.<br />
+```
+python3
+|- sys
+|- getopt
+|- os.path
+|- Bio 
+   |- AlignIO
+|- pprint
+   |- pprint
+```
+Basic usage: python fasta2paml.py -i fasta.file<br />
+Original author: [Jacob Steenwyk](https://jlsteenwyk.github.io/)
+
+### alignment_format_converter.py
+This script takes an input fasta file and outputs a file in a different format to stdout. Choices of output include: clustal, emboss, fasta, fasta-m10, ig, maf, mauve, nexus, phylip, phylip-sequential, phylip-relaxed, and stockholm.<br />
+Required arguments include:<br />
+-i: input fasta file<br />
+-f: output format<br />
+
+```
+python3
+|- sys
+|- getopt
+|- os.path
+|- Bio 
+   |- AlignIO
+```
+
+### translate_DNA2Protein.py
+This script will take as an input file a multi-fasta file and translate the nucleotides into their corresponding protein sequences.<br />
+The input file is specified with the -i argument and the -t argument specifies the translation table.<br />
+-i    fasta file<br />
+input fasta file of nucleotide sequences<br />
+-s    boolean for stop codon<br />
+T or F for keeping or removing a stop codon in a sequence, respectively.<br />
+-t    translation table<br /><br />
+Translation tables are available through NCBI. Argument should be a number and not a string that describes the table.<br />
+The following genetic codes are described here:<br />
+    1. The Standard Code<br />
+    2. The Vertebrate Mitochondrial Code<br />
+    3. The Yeast Mitochondrial Code<br />
+    4. The Mold, Protozoan, and Coelenterate Mitochondrial Code and the Mycoplasma/Spiroplasma Code<br />
+    5. The Invertebrate Mitochondrial Code<br />
+    6. The Ciliate, Dasycladacean and Hexamita Nuclear Code<br />
+    9. The Echinoderm and Flatworm Mitochondrial Code<br />
+    10. The Euplotid Nuclear Code<br />
+    11. The Bacterial, Archaeal and Plant Plastid Code<br />
+    12. The Alternative Yeast Nuclear Code<br />
+    13. The Ascidian Mitochondrial Code<br />
+    14. The Alternative Flatworm Mitochondrial Code<br />
+    16. Chlorophycean Mitochondrial Code<br />
+    21. Trematode Mitochondrial Code<br />
+    22. Scenedesmus obliquus Mitochondrial Code<br />
+    23. Thraustochytrium Mitochondrial Code<br />
+    24. Pterobranchia Mitochondrial Code<br />
+    25. Candidate Division SR1 and Gracilibacteria Code<br />
+    26. Pachysolen tannophilus Nuclear Code<br />
+    27. Karyorelict Nuclear Code<br />
+    28. Condylostoma Nuclear Code<br />
+    29. Mesodinium Nuclear Code<br />
+    30. Peritrich Nuclear Code<br />
+    31. Blastocrithidia Nuclear Code<br />
+    33. Cephalodiscidae Mitochondrial UAA-Tyr Code<br />
+    Additional details of translation tables can be found here [https://www.ncbi.nlm.nih.gov/Taxonomy/Utils/wprintgc.cgi](https://www.ncbi.nlm.nih.gov/Taxonomy/Utils/wprintgc.cgi)<br /><br />
 
 ## Authors
 
