@@ -316,6 +316,9 @@ python3
    |- AlignIO
 ```
 
+Basic usage: python alignment_format_converter.py -i fasta.file -f output.format<br />
+Original author: [Jacob Steenwyk](https://jlsteenwyk.github.io/)
+
 ### translate_DNA2Protein.py
 This script will take as an input file a multi-fasta file and translate the nucleotides into their corresponding protein sequences.<br />
 The input file is specified with the -i argument and the -t argument specifies the translation table.<br />
@@ -351,7 +354,7 @@ The following genetic codes are described here:<br />
     30. Peritrich Nuclear Code<br />
     31. Blastocrithidia Nuclear Code<br />
     33. Cephalodiscidae Mitochondrial UAA-Tyr Code<br />
-    Additional details of translation tables can be found here [https://www.ncbi.nlm.nih.gov/Taxonomy/Utils/wprintgc.cgi](https://www.ncbi.nlm.nih.gov/Taxonomy/Utils/wprintgc.cgi)<br /><br />
+    <br />Additional details of translation tables can be found here [https://www.ncbi.nlm.nih.gov/Taxonomy/Utils/wprintgc.cgi](https://www.ncbi.nlm.nih.gov/Taxonomy/Utils/wprintgc.cgi)<br /><br />
 
 ```
 python3
@@ -363,6 +366,9 @@ python3
 |- Bio.Seq
    |- Seq
 ```
+
+Basic usage: python translate_DNA2Protein.py -i fasta.file -s stop_codon.boolean -t translation.table<br />
+Original author: [Jacob Steenwyk](https://jlsteenwyk.github.io/)
 
 ## Authors
 
