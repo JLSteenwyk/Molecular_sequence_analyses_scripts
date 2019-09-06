@@ -353,6 +353,17 @@ The following genetic codes are described here:<br />
     33. Cephalodiscidae Mitochondrial UAA-Tyr Code<br />
     Additional details of translation tables can be found here [https://www.ncbi.nlm.nih.gov/Taxonomy/Utils/wprintgc.cgi](https://www.ncbi.nlm.nih.gov/Taxonomy/Utils/wprintgc.cgi)<br /><br />
 
+```
+python3
+|- sys
+|- getopt
+|- os.path
+|- Bio 
+   |- SeqIO
+|- Bio.Seq
+   |- Seq
+```
+
 ## Authors
 
 * **Jacob Steenwyk** - [Github page](https://jlsteenwyk.github.io/)
