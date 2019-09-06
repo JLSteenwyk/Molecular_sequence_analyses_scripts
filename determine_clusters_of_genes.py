@@ -6,6 +6,7 @@ import os.path
 import re
 import numpy as np
 from collections import OrderedDict
+import itertools
 
 def create_and_print_clusters(
     clusters,
@@ -24,7 +25,50 @@ def create_and_print_clusters(
 
     clusterArr = []
 
-    for cluster in clusters:
+    # collapse clusters that share genes
+    ## Looping over lines to collapse clusters with the same genes in them
+    collapsed_clusters = []
+    idx_ii             = 0
+    idx_jj             = idx_ii + 1
+    idx_opt            = True
+    while_opt          = True
+    # Looping over first line
+    while(idx_opt):
+        try:
+            line_ii = clusters[idx_ii]
+            line_jj = clusters[idx_jj]
+            # Testing condition
+            line_ii_opt = True
+            # loop through clusters
+            while(line_ii_opt):
+                new_line = line_ii
+                iiGenes = []
+                jjGenes = []
+                for iiEntries in line_ii:
+                    iiGenes.append(iiEntries[3])
+                for jjEntries in line_jj:
+                    jjGenes.append(jjEntries[3])
+                # if genes are shared between two cluster entries, collapse them into one entry
+                if len(list(set(iiGenes).intersection(jjGenes))) >= 2:
+                    idx_jj  += int(1)
+                    # new line is line 1 start, line 2 stop, line 2 outgroup ID, line 2 gap ID
+                    new_line = line_ii + line_jj
+                    new_line.sort()
+                    new_line = list(new_line for new_line,_ in itertools.groupby(new_line))
+                    line_ii  = new_line
+                    line_jj  = clusters[idx_jj]
+                # if genes are not shared between two cluster entries do not collapse them into one entry
+                else:
+                    line_ii_opt = False
+                    collapsed_clusters.append(new_line)
+                    idx_ii = idx_jj
+                    idx_jj = idx_ii + 1
+        # except for end of clusters
+        except IndexError:
+            collapsed_clusters.append(line_ii)
+            idx_opt = False
+
+    for cluster in collapsed_clusters:
         # determine chr, start, end, and number of genes in cluster
         clusterChr     = cluster[0][0]
         clusterStart   = cluster[0][1]
@@ -300,19 +344,24 @@ def main(
         if opt == '-h':
             ## explanation
             print("\nTakes as input an NCBI features table and a bed file of the genes of interest.")
-            print("\nThe script will then determine if the genes of interest are in a cluster or not.")
-            print("\nAdditionally, this script will find genes inbetween clustered genes.")
-            print("\nOutput is a print out of gene clustering (or lack thereof). More specifically,")
-            print("\ncol1: scaffolds genes are on")
-            print("\ncol2: cluster start")
-            print("\ncol3: cluster stop")
-            print("\ncol4: number of unique homolog identifiers")
-            print("\ncol5: number of total genes in the cluster")
-            print("\ncol6: clustered gene identifiers in order of genomic appearance")
-            print("\ncol7: homolog identifiers that correspond to the genes in col6\n")
-            print("\nThe -b parameter file should contain: col1: scaffold, col2: gene start, col3: gene stop")
-            print("\ncol4: variable column, and col5: the homolog identier. For example, for the MAL locus,")
-            print("\nthe homolog identifier could be MALx3 for MALx3 homologs.")
+            print("The script will then determine if the genes of interest are in a cluster or not.")
+            print("Additionally, this script will find genes inbetween clustered genes.")
+            print("Output is a print out of gene clustering (or lack thereof). More specifically,")
+            print("col1: scaffolds genes are on")
+            print("col2: cluster start")
+            print("col3: cluster stop")
+            print("col4: number of unique homolog identifiers")
+            print("col5: number of total genes in the cluster")
+            print("col6: clustered gene identifiers in order of genomic appearance")
+            print("col7: homolog identifiers that correspond to the genes in col6\n")
+            print("The -b parameter file should contain: col1: scaffold, col2: gene start, col3: gene stop")
+            print("col4: gene ID, col5: variable column, and col6: the homolog identier. For example, for the MAL locus,")
+            print("the homolog identifier could be MALx3 for MALx3 homologs.")
+            print("For example, using the gliotoxin gene cluster of Aspergillus fumigatus Af293...")
+            print("\nCM000169.1\t1434575\t1436118\tEAL88212.1\tAspergillus_fumigatus_Af293.GCA_000002655.1_ASM265v1\tGliA")
+            print("CM000169.1\t2271529\t2272650\tEAL90209.1\tAspergillus_fumigatus_Af293.GCA_000002655.1_ASM265v1\tGliC")
+            print("CM000169.1\t2678281\t2693904\tEAL90366.1\tAspergillus_fumigatus_Af293.GCA_000002655.1_ASM265v1\tGliP")
+            print("...\t\t...\t...\t...\t\t...\t\t\t\t\t\t\t...\n")
             ## options
             # feature table
             print("\n-f\t<feature table>:")

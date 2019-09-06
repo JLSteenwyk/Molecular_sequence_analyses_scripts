@@ -250,7 +250,29 @@ Basic usage: python Sneaths_index.py -i fasta.file -g outgroup_taxa.list -t taxo
 Original author: [Jacob Steenwyk](https://jlsteenwyk.github.io/)
 
 ### determine_clusters_of_genes.py
-Takes as input an NCBI features table and a bed file of the genes of interest. The script will then determine if the genes of interest are in a cluster or not. Additionally, this script will find genes inbetween clustered genes. Output is a print out of gene clustering (or lack thereof). More specifically, <br />col1: scaffolds genes are on, <br />col2: cluster start, <br />col3: cluster stop, <br />col4: number of unique homolog identifiers, <br />col5: number of total genes in the cluster, <br />col6: clustered gene identifiers in order of genomic appearance, <br />col7: homolog identifiers that correspond to the genes in col6. The -b parameter file should contain: col1: scaffold, col2: gene start, col3: gene stop col4: variable column, and col5: the homolog identier. For example, for the MAL locus, the homolog identifier could be MALx3 for MALx3 homologs.
+Takes as input an NCBI features table and a bed file of the genes of interest.<br />
+The script will then determine if the genes of interest are in a cluster or not.<br />
+Additionally, this script will find genes inbetween clustered genes<br />
+Output is a print out of gene clustering (or lack thereof). More specifically,<br />
+col1: scaffolds genes are on<br />
+col2: cluster start<br />
+col3: cluster stop<br />
+col4: number of unique homolog identifiers<br />
+col5: number of total genes in the cluster<br />
+col6: clustered gene identifiers in order of genomic appearance<br />
+col7: homolog identifiers that correspond to the genes in col6<br />
+The -b parameter file should contain: col1: scaffold, col2: gene start, col3: gene stop<br />
+col4: gene ID, col5: variable column, and col6: the homolog identier. For example, for the MAL locus,<br />
+the homolog identifier could be MALx3 for MALx3 homologs.<br />
+For example, using the gliotoxin gene cluster of Aspergillus fumigatus Af293...<br />
+CM000169.1    1434575    1436118    EAL88212.1    Aspergillus_fumigatus_Af293.GCA_000002655.1_ASM265v1    GliA<br />
+CM000169.1    2271529    2272650    EAL90209.1    Aspergillus_fumigatus_Af293.GCA_000002655.1_ASM265v1    GliC<br />
+CM000169.1    2678281    2693904    EAL90366.1    Aspergillus_fumigatus_Af293.GCA_000002655.1_ASM265v1    GliP<br />
+...    ...    ...    ...        ...                             ...<br />
+arguments
+<br />-f    <feature table> -- as downloaded from NCBI
+<br />-b    <bed file of genes of interest>
+<br />-g    <gene distance boundary> -- An integer that represents how many genes away to look for linked clusters.
 ```
 python3
 |- sys
