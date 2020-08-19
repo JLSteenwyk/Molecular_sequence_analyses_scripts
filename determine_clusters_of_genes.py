@@ -368,7 +368,7 @@ def main(
             print("\tfeatures table from NCBI")
             # bed file
             print("\n-b\t<bed file of genes of interest>:")
-            print("\tInput bed file.\n\n")
+            print("\tInput bed file.")
             # gene number boundary
             print("\n-g\t<gene distance boundary>:")
             print("\tAn integer that represents how many genes away to look for linked clusters.\n\n")
